@@ -15,7 +15,7 @@ export function Footer() {
     <footer className="site-footer">
       <div>
         <p className="eyebrow">titulotransporte.com</p>
-        <h2>Una web más rápida, clara y preparada para crecer en SEO.</h2>
+        <h2>Resuelve tu título de transporte con una ruta clara y sin rodeos.</h2>
       </div>
       <div className="footer-grid">
         <div>

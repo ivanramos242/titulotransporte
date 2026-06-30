@@ -6,48 +6,48 @@ const homeRoute = routeByPath("/")!;
 export const metadata = metadataFor(homeRoute);
 
 const proofItems = [
-  ["4.484", "preguntas de test a migrar"],
-  ["30", "guías SEO preservadas"],
-  ["99 EUR", "precio actual del curso"],
-  ["1", "redirección crítica detectada"],
+  ["4.484", "preguntas reales de examen"],
+  ["30", "guías sobre transporte"],
+  ["99 EUR", "curso online actual"],
+  ["España", "normativa y trámites"],
 ];
 
 const services = [
   {
     title: "Alquilar título de transporte",
-    text: "Orientación para empresas que necesitan operar cuanto antes con una vía clara y revisada.",
+    text: "Estudiamos tu caso y te orientamos sobre la vía adecuada para operar con gestor o título de transporte.",
     href: "/titulos/",
   },
   {
     title: "Ceder tu título",
-    text: "Acompañamiento para titulares que quieren estudiar una cesión con orden y sin improvisar.",
+    text: "Acompañamiento para titulares que quieren valorar una cesión de forma ordenada y con criterios claros.",
     href: "/cede-tu-titulo-de-transporte/",
   },
   {
-    title: "Curso y test",
-    text: "Preparación online para competencia profesional de mercancías con tests y apoyo de profesor IA.",
+    title: "Curso y test online",
+    text: "Preparación para la competencia profesional de mercancías con preguntas reales, simulación y apoyo de estudio.",
     href: "/producto/curso-titulo-profesional-transporte/",
   },
 ];
 
 const faq = [
   [
-    "¿Puedo mantener los mismos slugs de WordPress?",
-    "Sí. La migración se está planteando para conservar la estructura actual y redirigir solo lo imprescindible.",
+    "¿Qué es un título de transporte?",
+    "Es la capacitación profesional necesaria para que una empresa pueda cumplir los requisitos de acceso a la actividad de transporte de mercancías por carretera.",
   ],
   [
-    "¿Qué pasa con el curso y los pagos?",
-    "La intención es sustituir WooCommerce por un flujo propio con Stripe, manteniendo producto, acceso y trazabilidad.",
+    "¿Puedo alquilar un título de transporte?",
+    "Depende de la situación de la empresa, del gestor de transporte y de cómo se cumplan los requisitos legales. Por eso conviene revisar el caso antes de tomar una decisión.",
   ],
   [
-    "¿Se migrarán los tests?",
-    "Sí. La base actual contiene miles de preguntas que deben pasar a un motor propio de práctica y simulacro.",
+    "¿Cómo preparo el examen de competencia profesional?",
+    "Puedes practicar con el banco de preguntas, hacer simulacros y reforzar los temas que fallas antes de presentarte al examen.",
   ],
 ];
 
 export default function Home() {
   const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-    "Quiero alquilar un título de transporte",
+    "Quiero información sobre el título de transporte",
   )}`;
 
   return (
@@ -59,34 +59,33 @@ export default function Home() {
           <p className="hero-lead">
             Te ayudamos a estudiar la vía adecuada para alquilar un título de
             transporte, cederlo o preparar la competencia profesional con curso,
-            tests y apoyo de profesor IA.
+            test online y apoyo de profesor IA.
           </p>
           <div className="hero-actions">
             <a className="button primary" href={whatsappUrl}>
               Hablar por WhatsApp
             </a>
             <Link className="button secondary" href="/test-competencia-profesional-mercancias/">
-              Practicar tests
+              Practicar test
             </Link>
           </div>
         </div>
-        <div className="hero-panel" aria-label="Resumen de migración">
-          <span className="panel-kicker">Plan de migración</span>
-          <strong>Alquiler, cesión y formación</strong>
+        <div className="hero-panel" aria-label="Opciones de título de transporte">
+          <span className="panel-kicker">Alquiler · cesión · formación</span>
+          <strong>Una ruta clara para operar o prepararte</strong>
           <p>
-            Una ruta clara para empresas que quieren operar antes y para
-            profesionales que quieren sacar partido a su capacitación.
+            Combinamos asesoría, formación y práctica para que sepas qué opción
+            encaja mejor con tu empresa o con tu capacitación profesional.
           </p>
           <div className="route-strip">
-            <span>/</span>
-            <span>/blog/</span>
-            <span>/producto/...</span>
-            <span>/test-...</span>
+            <Link href="/titulos/">Alquilar título</Link>
+            <Link href="/cede-tu-titulo-de-transporte/">Ceder título</Link>
+            <Link href="/test-competencia-profesional-mercancias/">Test online</Link>
           </div>
         </div>
       </section>
 
-      <section className="proof-strip" aria-label="Datos auditados">
+      <section className="proof-strip" aria-label="Datos principales">
         {proofItems.map(([value, label]) => (
           <div key={label}>
             <strong>{value}</strong>
@@ -102,21 +101,21 @@ export default function Home() {
         </div>
         <p>
           Si necesitas iniciar o regularizar una actividad de transporte de
-          mercancías, el primer paso es entender qué opción encaja: alquilar un
-          título, contar con un gestor de transporte, preparar el examen o
-          resolver trámites legales.
+          mercancías, el primer paso es entender qué opción encaja: contar con
+          un gestor de transporte, preparar el examen, revisar una cesión o
+          resolver los requisitos administrativos.
         </p>
       </section>
 
       <section className="services" aria-labelledby="servicios-heading">
         <div className="section-heading">
-          <p className="eyebrow">Rutas comerciales</p>
-          <h2 id="servicios-heading">Tres caminos, una estructura clara</h2>
+          <p className="eyebrow">Servicios y formación</p>
+          <h2 id="servicios-heading">Tres caminos para resolver tu situación</h2>
         </div>
         <div className="service-grid">
-          {services.map((service) => (
+          {services.map((service, index) => (
             <Link key={service.href} className="service-card" href={service.href}>
-              <span>0{services.indexOf(service) + 1}</span>
+              <span>0{index + 1}</span>
               <h3>{service.title}</h3>
               <p>{service.text}</p>
             </Link>
@@ -126,12 +125,12 @@ export default function Home() {
 
       <section className="section dark-band">
         <div>
-          <p className="eyebrow">SEO técnico</p>
-          <h2>Sin trámites innecesarios ni promesas confusas</h2>
+          <p className="eyebrow">Sin atajos confusos</p>
+          <h2>Decisiones claras antes de mover dinero o presentar trámites</h2>
         </div>
         <ul className="check-list">
           <li>Orientación inicial para entender tu caso.</li>
-          <li>Opciones separadas para alquiler, cesión, curso y tests.</li>
+          <li>Opciones separadas para alquiler, cesión, curso y test.</li>
           <li>Contacto directo por WhatsApp o formulario.</li>
           <li>Contenido claro sobre requisitos, gestor y normativa.</li>
         </ul>
@@ -139,7 +138,7 @@ export default function Home() {
 
       <section className="faq" aria-labelledby="faq-heading">
         <p className="eyebrow">Preguntas frecuentes</p>
-        <h2 id="faq-heading">Decisiones importantes de la migración</h2>
+        <h2 id="faq-heading">Dudas habituales sobre el título de transporte</h2>
         <div className="faq-list">
           {faq.map(([question, answer]) => (
             <details key={question}>

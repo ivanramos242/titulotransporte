@@ -4,7 +4,7 @@ import { site } from "@/lib/site";
 const navigation = [
   { href: "/", label: "Inicio" },
   { href: "/titulos/", label: "Títulos" },
-  { href: "/test-competencia-profesional-mercancias/", label: "Tests" },
+  { href: "/test-competencia-profesional-mercancias/", label: "Test" },
   { href: "/producto/curso-titulo-profesional-transporte/", label: "Curso" },
   { href: "/cede-tu-titulo-de-transporte/", label: "Ceder título" },
   { href: "/blog/", label: "Blog" },
@@ -13,7 +13,7 @@ const navigation = [
 export function Header() {
   return (
     <header className="site-header">
-      <Link href="/" className="brand" aria-label="Ir a la home">
+      <Link href="/" className="brand" aria-label="Ir a la página de inicio">
         <span className="brand-mark">TT</span>
         <span>
           <strong>titulotransporte</strong>

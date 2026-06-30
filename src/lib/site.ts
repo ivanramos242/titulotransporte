@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import wpContent from "@/data/wp-content.json";
 
 export const site = {
   name: "titulotransporte.com",
@@ -188,51 +189,13 @@ export const migratedRoutes: RouteRecord[] = [
   },
 ];
 
-export const blogPosts: RouteRecord[] = [
-  "como-es-el-examen-de-competencia-profesional-de-mercancias-formato-tiempos-y-que-estudiar",
-  "plan-de-estudio-en-30-dias-para-aprobar-competencia-profesional-mercancias",
-  "plan-de-estudio-en-6-semanas-trabajando-competencia-profesional-mercancias",
-  "errores-que-te-hacen-suspender-el-examen-de-transportista-y-como-evitarlos",
-  "como-usar-tests-oficiales-para-aprobar-metodo-en-3-pasos",
-  "simulacro-completo-como-medir-tu-nivel-y-decidir-si-estas-listo",
-  "supuestos-practicos-metodo-paso-a-paso-para-resolverlos-plantilla-incluida",
-  "como-memorizar-el-temario-de-transportista-tecnicas-que-si-funcionan",
-  "acceso-a-la-profesion-requisitos-clave-explicados-facil-mercancias",
-  "gestion-comercial-como-calcular-precios-y-presupuestos-en-transporte",
-  "normas-tecnicas-y-explotacion-conceptos-que-mas-caen-en-el-test",
-  "seguridad-vial-y-prevencion-lo-imprescindible-para-aprobar-mercancias",
-  "lott-y-rott-que-son-y-como-te-afectan-resumen-practico",
-  "autorizaciones-mdl-y-mdp-diferencias-requisitos-y-como-solicitarlas",
-  "capacidad-financiera-en-transporte-cuanto-necesitas-y-como-acreditarla",
-  "honorabilidad-en-transporte-que-es-como-se-pierde-y-como-evitar-problemas",
-  "que-hace-un-gestor-de-transporte-funciones-y-responsabilidades",
-  "casos-practicos-gestor-de-transporte-en-autonomo-vs-sociedad",
-  "como-crear-una-empresa-de-transporte-checklist-de-requisitos-y-tramites",
-  "costes-fijos-y-variables-en-transporte-guia-con-ejemplo-real",
-  "como-calcular-el-precio-por-kilometro-km-en-transporte-de-mercancias",
-  "rentabilidad-en-transporte-margen-minimo-errores-y-como-mejorarlo",
-  "fiscalidad-basica-del-transportista-iva-irpf-y-gastos-deducibles",
-  "subcontratacion-en-transporte-cuando-conviene-y-que-riesgos-tiene",
-  "carta-de-porte-cmr-que-es-como-se-rellena-y-ejemplos",
-  "tacografo-digital-guia-rapida-para-el-examen-normas-y-obligaciones",
-  "descansos-diarios-y-semanales-reglas-y-ejemplos-para-no-confundirte",
-  "sanciones-por-tacografo-infracciones-tipicas-y-como-evitarlas",
-  "inspeccion-de-transporte-que-revisan-y-como-prepararte",
-  "prevencion-de-riesgos-en-transporte-checklist-de-seguridad-para-empresas",
-].map((slug) => ({
-  path: `/${slug}/`,
-  title: slug
-    .split("-")
-    .map((word) => word[0]?.toUpperCase() + word.slice(1))
-    .join(" "),
-  description:
-    "Guía de titulotransporte.com pendiente de migración editorial desde WordPress.",
-  h1: slug
-    .split("-")
-    .map((word) => word[0]?.toUpperCase() + word.slice(1))
-    .join(" "),
+export const blogPosts: RouteRecord[] = wpContent.posts.map((post) => ({
+  path: post.path,
+  title: post.seoTitle || post.title,
+  description: post.seoDescription || post.excerpt,
+  h1: post.title,
   type: "post",
-  lastModified: "2026-02-23",
+  lastModified: post.modified || post.date || "2026-02-23",
 }));
 
 export const allRoutes = [...migratedRoutes, ...blogPosts];
@@ -253,7 +216,7 @@ export function metadataFor(route: RouteRecord): Metadata {
       ? { index: false, follow: true }
       : { index: true, follow: true },
     openGraph: {
-      type: route.type === "product" ? "website" : "article",
+      type: route.type === "post" ? "article" : "website",
       locale: "es_ES",
       siteName: site.name,
       title: route.title,

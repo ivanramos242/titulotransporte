@@ -18,6 +18,10 @@ function findMigratedContent(path: string) {
   );
 }
 
+function normalizeLegacyHtml(html: string) {
+  return html.replace(/<h1(\s[^>]*)?>/gi, "<h2$1>").replace(/<\/h1>/gi, "</h2>");
+}
+
 function schemaForRoute(route: (typeof allRoutes)[number], title: string, description: string) {
   const url = new URL(route.path, site.url).toString();
   const breadcrumb = {
@@ -109,7 +113,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
   const isAccount = route.type === "account";
   const isPost = route.type === "post";
   const migratedContent = findMigratedContent(route.path);
-  const migratedHtml = migratedContent?.html || "";
+  const migratedHtml = normalizeLegacyHtml(migratedContent?.html || "");
   const hasHtml = Boolean(migratedHtml);
   const isTestPage = route.path === "/test-competencia-profesional-mercancias/";
   const pageTitle = migratedContent?.title || route.h1;
@@ -120,7 +124,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
     <main>
       <section className="subhero">
         <p className="eyebrow">
-          {isPost ? "Guia" : isProduct ? "Producto" : "titulotransporte.com"}
+          {isPost ? "Guía" : isProduct ? "Producto" : "titulotransporte.com"}
         </p>
         <h1>{pageTitle}</h1>
         <p>{pageDescription}</p>
@@ -133,7 +137,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
             <a
               className="button primary"
               href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                `Quiero informacion sobre ${pageTitle}`,
+                `Quiero información sobre ${pageTitle}`,
               )}`}
             >
               Consultar por WhatsApp
@@ -162,7 +166,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
           </div>
           <div className="copy-stack">
             <p>
-              Esta zona forma parte del area de alumnos y clientes. Accede a tu
+              Esta zona forma parte del área de alumnos y clientes. Accede a tu
               cuenta o consulta el curso para ver las opciones disponibles.
             </p>
             {isProduct ? (
@@ -181,7 +185,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
           <h2>Resuelve tus dudas sobre transporte</h2>
         </div>
         <ul className="check-list">
-          <li>Consulta requisitos antes de iniciar el tramite.</li>
+          <li>Consulta requisitos antes de iniciar el trámite.</li>
           <li>Revisa si te interesa alquilar, ceder o preparar el examen.</li>
           <li>Accede a test y materiales de competencia profesional.</li>
           <li>Habla con el equipo para estudiar tu caso concreto.</li>
@@ -192,7 +196,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
         <section className="services">
           <div className="section-heading">
             <p className="eyebrow">Archivo editorial</p>
-            <h2>Guias sobre transporte y competencia profesional</h2>
+            <h2>Guías sobre transporte y competencia profesional</h2>
           </div>
           <div className="post-list">
             {blogPosts.slice(0, 12).map((post) => (

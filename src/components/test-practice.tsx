@@ -78,10 +78,10 @@ export function TestPractice() {
           <h2 id="test-app-heading">Practica con preguntas reales de competencia profesional</h2>
           <p>
             Banco completo con {questionsData.total.toLocaleString("es-ES")} preguntas exportadas,
-            organizadas por modulo y con comprobacion inmediata de respuesta.
+            organizadas por módulo y con comprobación inmediata de respuesta.
           </p>
         </div>
-        <div className="module-tabs" aria-label="Seleccionar modulo">
+        <div className="module-tabs" aria-label="Seleccionar módulo">
           {questionsData.modules.map((item) => (
             <button
               key={item}
@@ -89,7 +89,7 @@ export function TestPractice() {
               className={item === module ? "active" : ""}
               onClick={() => changeModule(item)}
             >
-              Modulo {item}
+              Módulo {item}
             </button>
           ))}
         </div>

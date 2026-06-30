@@ -1,4 +1,4 @@
-:root {
+﻿:root {
   --ink: #16120f;
   --muted: #6f645c;
   --paper: #fbfaf7;
@@ -280,6 +280,7 @@ h3 {
   margin-top: 26px;
 }
 
+.route-strip a,
 .route-strip span {
   border: 1px solid rgba(29, 26, 23, 0.12);
   border-radius: 999px;
@@ -462,21 +463,6 @@ details p {
   margin: 0 auto 96px;
 }
 
-.wp-content-note {
-  display: grid;
-  grid-template-columns: 0.35fr 1fr;
-  gap: 24px;
-  border: 1px solid var(--line);
-  border-radius: 20px;
-  margin-bottom: 22px;
-  padding: 18px 22px;
-  background: #fff;
-}
-
-.wp-content-note p {
-  margin: 0;
-  color: var(--muted);
-}
 
 .wp-content {
   border: 1px solid var(--line);
@@ -795,3 +781,4 @@ details p {
     padding: 26px;
   }
 }
+
