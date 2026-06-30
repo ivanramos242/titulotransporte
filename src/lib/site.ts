@@ -191,7 +191,7 @@ export const migratedRoutes: RouteRecord[] = [
 
 export const blogPosts: RouteRecord[] = wpContent.posts.map((post) => ({
   path: post.path,
-  title: post.seoTitle || post.title,
+  title: post.hasRankTitle ? post.seoTitle : post.title,
   description: post.seoDescription || post.excerpt,
   h1: post.title,
   type: "post",

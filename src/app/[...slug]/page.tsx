@@ -90,10 +90,17 @@ export async function generateMetadata({ params }: PageProps) {
 
   const migratedContent = findMigratedContent(path);
   if (migratedContent) {
+    const title = migratedContent.hasRankTitle
+      ? migratedContent.seoTitle
+      : route.title;
+    const description = migratedContent.hasRankDescription
+      ? migratedContent.seoDescription
+      : route.description;
+
     return metadataFor({
       ...route,
-      title: migratedContent.seoTitle || migratedContent.title || route.title,
-      description: migratedContent.seoDescription || migratedContent.excerpt || route.description,
+      title,
+      description,
       h1: migratedContent.title || route.h1,
     });
   }
@@ -117,7 +124,9 @@ export default async function MigratedRoutePage({ params }: PageProps) {
   const hasHtml = Boolean(migratedHtml);
   const isTestPage = route.path === "/test-competencia-profesional-mercancias/";
   const pageTitle = migratedContent?.title || route.h1;
-  const pageDescription = migratedContent?.seoDescription || migratedContent?.excerpt || route.description;
+  const pageDescription = migratedContent?.hasRankDescription
+    ? migratedContent.seoDescription
+    : route.description;
   const schemas = schemaForRoute(route, pageTitle, pageDescription);
 
   return (

@@ -37,7 +37,10 @@ function stripTags(html = "") {
 }
 
 function seoDescription(value = "", fallback = "") {
-  const text = stripTags(value || fallback).replace(/\s+/g, " ").trim();
+  const text = stripTags(value || fallback)
+    .replace(/\\n/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
   if (text.length <= 158) {
     return text;
   }
@@ -96,6 +99,8 @@ function normalizeWpItem(item, type, metaByPostId) {
   const meta = metaByPostId.get(String(item.id)) || {};
   const rankTitle = stripTags(meta.rank_math_title || "");
   const rankDescription = seoDescription(meta.rank_math_description || "", item.excerpt?.rendered || item.short_description || html);
+  const hasRankTitle = Boolean(meta.rank_math_title);
+  const hasRankDescription = Boolean(meta.rank_math_description);
 
   return {
     id: item.id,
@@ -105,7 +110,9 @@ function normalizeWpItem(item, type, metaByPostId) {
     title,
     excerpt: seoDescription(item.excerpt?.rendered || item.short_description || "", html),
     seoTitle: rankTitle || title,
+    hasRankTitle,
     seoDescription: rankDescription,
+    hasRankDescription,
     html,
     textLength: stripTags(html).length,
     headings: headings(html),
