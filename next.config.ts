@@ -5,7 +5,7 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: "/test-online/",
+        source: "/test-online",
         destination: "/test-competencia-profesional-mercancias/",
         permanent: true,
       },
