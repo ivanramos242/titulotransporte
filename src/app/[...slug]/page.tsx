@@ -1,5 +1,7 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { TestPractice } from "@/components/test-practice";
+import wpContent from "@/data/wp-content.json";
 import { allRoutes, blogPosts, metadataFor, routeByPath, site } from "@/lib/site";
 
 type PageProps = {
@@ -8,6 +10,12 @@ type PageProps = {
 
 function pathFromSlug(slug: string[]) {
   return `/${slug.join("/")}/`;
+}
+
+function findMigratedContent(path: string) {
+  return [...wpContent.pages, ...wpContent.posts, ...wpContent.products].find(
+    (item) => item.path === path,
+  );
 }
 
 export async function generateStaticParams() {
@@ -40,6 +48,10 @@ export default async function MigratedRoutePage({ params }: PageProps) {
   const isProduct = route.type === "product";
   const isAccount = route.type === "account";
   const isPost = route.type === "post";
+  const migratedContent = findMigratedContent(route.path);
+  const migratedHtml = migratedContent?.html || "";
+  const hasHtml = Boolean(migratedHtml);
+  const isTestPage = route.path === "/test-competencia-profesional-mercancias/";
 
   return (
     <main>
@@ -70,33 +82,44 @@ export default async function MigratedRoutePage({ params }: PageProps) {
         </div>
       </section>
 
-      <section className="section two-col">
-        <div>
-          <p className="eyebrow">Estado de migración</p>
-          <h2>Contenido preservado, pendiente de volcado editorial completo</h2>
-        </div>
-        <div className="copy-stack">
-          <p>
-            Esta ruta existe para mantener la arquitectura SEO actual mientras
-            se migra el contenido de WordPress a componentes y datos propios.
-            El siguiente paso es sustituir este cuerpo provisional por el texto,
-            imágenes, FAQs y enlaces internos extraídos del sitio original.
-          </p>
-          {isProduct ? (
+      {isTestPage ? <TestPractice /> : null}
+
+      {hasHtml ? (
+        <article className="wp-content-shell">
+          <div className="wp-content-note">
+            <p className="eyebrow">Contenido original migrado</p>
             <p>
-              Producto detectado: curso virtual y descargable con precio actual
-              de 99 EUR. La compra final se portará a Stripe Checkout.
+              Texto renderizado desde WordPress. La maquetación se está
+              transformando a componentes Next sin perder contenido ni slug.
             </p>
-          ) : null}
-          {isPost ? (
+          </div>
+          <div
+            className="wp-content"
+            dangerouslySetInnerHTML={{ __html: migratedHtml }}
+          />
+        </article>
+      ) : (
+        <section className="section two-col">
+          <div>
+            <p className="eyebrow">Estado de migración</p>
+            <h2>Ruta preparada para función privada</h2>
+          </div>
+          <div className="copy-stack">
             <p>
-              Este artículo forma parte del bloque editorial de 30 guías
-              detectadas en el sitemap. Se conservará el slug y se revisará la
-              jerarquía de headings antes de publicarlo.
+              Esta ruta depende de funcionalidad privada de WordPress o de un
+              plugin: login, cuenta, checkout, membresía o profesor IA. La ruta
+              queda preservada y marcada según su intención mientras se porta la
+              lógica a Next.
             </p>
-          ) : null}
-        </div>
-      </section>
+            {isProduct ? (
+              <p>
+                Producto detectado: curso virtual y descargable con precio
+                actual de 99 EUR. La compra final se portará a Stripe Checkout.
+              </p>
+            ) : null}
+          </div>
+        </section>
+      )}
 
       <section className="section dark-band">
         <div>
@@ -107,7 +130,11 @@ export default async function MigratedRoutePage({ params }: PageProps) {
           <li>Title y meta description específicos.</li>
           <li>Canonical absoluto hacia la URL final.</li>
           <li>{route.noindex ? "Noindex intencional." : "Indexable por defecto."}</li>
-          <li>Un único H1 y estructura lista para H2/H3 reales.</li>
+          <li>
+            {hasHtml
+              ? "Contenido original visible en HTML renderizado."
+              : "Estructura lista para lógica privada."}
+          </li>
         </ul>
       </section>
 

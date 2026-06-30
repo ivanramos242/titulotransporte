@@ -57,9 +57,9 @@ export default function Home() {
           <p className="eyebrow">Título de transporte · España</p>
           <h1>{homeRoute.h1}</h1>
           <p className="hero-lead">
-            Migramos la experiencia actual de WordPress a una plataforma más
-            rápida y mantenible, preservando las rutas que ya posicionan y
-            mejorando la conversión sin inflar el contenido.
+            Te ayudamos a estudiar la vía adecuada para alquilar un título de
+            transporte, cederlo o preparar la competencia profesional con curso,
+            tests y apoyo de profesor IA.
           </p>
           <div className="hero-actions">
             <a className="button primary" href={whatsappUrl}>
@@ -72,10 +72,10 @@ export default function Home() {
         </div>
         <div className="hero-panel" aria-label="Resumen de migración">
           <span className="panel-kicker">Plan de migración</span>
-          <strong>WordPress → Next.js</strong>
+          <strong>Alquiler, cesión y formación</strong>
           <p>
-            SEO, contenido, curso, membresías, tests y profesor IA se migran
-            como piezas controladas, no como una copia visual de Divi.
+            Una ruta clara para empresas que quieren operar antes y para
+            profesionales que quieren sacar partido a su capacitación.
           </p>
           <div className="route-strip">
             <span>/</span>
@@ -98,13 +98,13 @@ export default function Home() {
       <section className="section two-col">
         <div>
           <p className="eyebrow">Intención principal</p>
-          <h2>Captar clientes que buscan operar con título de transporte</h2>
+          <h2>Para empresas que necesitan operar con título de transporte</h2>
         </div>
         <p>
-          La home actual posiciona alrededor de “alquilar título de
-          transporte”. La nueva versión mantiene esa intención, pero reduce
-          repetición, refuerza confianza y separa mejor alquiler, cesión, curso
-          y tests para evitar mensajes mezclados.
+          Si necesitas iniciar o regularizar una actividad de transporte de
+          mercancías, el primer paso es entender qué opción encaja: alquilar un
+          título, contar con un gestor de transporte, preparar el examen o
+          resolver trámites legales.
         </p>
       </section>
 
@@ -127,13 +127,13 @@ export default function Home() {
       <section className="section dark-band">
         <div>
           <p className="eyebrow">SEO técnico</p>
-          <h2>La migración empieza por no perder lo que ya funciona</h2>
+          <h2>Sin trámites innecesarios ni promesas confusas</h2>
         </div>
         <ul className="check-list">
-          <li>Slugs actuales preservados y auditados contra sitemap.</li>
-          <li>Metadatos, canonicals, robots y schema definidos por ruta.</li>
-          <li>Contenido indexable en HTML server-rendered.</li>
-          <li>Assets optimizados y menos JavaScript que WordPress + Divi.</li>
+          <li>Orientación inicial para entender tu caso.</li>
+          <li>Opciones separadas para alquiler, cesión, curso y tests.</li>
+          <li>Contacto directo por WhatsApp o formulario.</li>
+          <li>Contenido claro sobre requisitos, gestor y normativa.</li>
         </ul>
       </section>
 
