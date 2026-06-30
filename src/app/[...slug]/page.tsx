@@ -28,10 +28,21 @@ export async function generateStaticParams() {
 
 export async function generateMetadata({ params }: PageProps) {
   const { slug } = await params;
-  const route = routeByPath(pathFromSlug(slug));
+  const path = pathFromSlug(slug);
+  const route = routeByPath(path);
 
   if (!route) {
     return {};
+  }
+
+  const migratedContent = findMigratedContent(path);
+  if (migratedContent) {
+    return metadataFor({
+      ...route,
+      title: migratedContent.title || route.title,
+      description: migratedContent.excerpt || route.description,
+      h1: migratedContent.title || route.h1,
+    });
   }
 
   return metadataFor(route);
@@ -52,6 +63,8 @@ export default async function MigratedRoutePage({ params }: PageProps) {
   const migratedHtml = migratedContent?.html || "";
   const hasHtml = Boolean(migratedHtml);
   const isTestPage = route.path === "/test-competencia-profesional-mercancias/";
+  const pageTitle = migratedContent?.title || route.h1;
+  const pageDescription = migratedContent?.excerpt || route.description;
 
   return (
     <main>
@@ -59,8 +72,8 @@ export default async function MigratedRoutePage({ params }: PageProps) {
         <p className="eyebrow">
           {isPost ? "Guía migrada" : isProduct ? "Producto" : "Ruta heredada"}
         </p>
-        <h1>{route.h1}</h1>
-        <p>{route.description}</p>
+        <h1>{pageTitle}</h1>
+        <p>{pageDescription}</p>
         <div className="hero-actions compact">
           {isAccount ? (
             <Link className="button primary" href="/producto/curso-titulo-profesional-transporte/">
@@ -70,7 +83,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
             <a
               className="button primary"
               href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                `Quiero información sobre ${route.h1}`,
+                `Quiero información sobre ${pageTitle}`,
               )}`}
             >
               Consultar por WhatsApp
