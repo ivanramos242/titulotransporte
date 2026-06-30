@@ -36,6 +36,43 @@ function stripTags(html = "") {
   );
 }
 
+function seoDescription(value = "", fallback = "") {
+  const text = stripTags(value || fallback).replace(/\s+/g, " ").trim();
+  if (text.length <= 158) {
+    return text;
+  }
+
+  const clipped = text.slice(0, 158);
+  const lastSpace = clipped.lastIndexOf(" ");
+  return `${clipped.slice(0, lastSpace > 120 ? lastSpace : 155).trim()}...`;
+}
+
+function readPostMeta() {
+  const file = path.join(exportDir, "expanded", "postmeta-selected.tsv");
+  if (!fs.existsSync(file)) {
+    return new Map();
+  }
+
+  const meta = new Map();
+  const rows = fs.readFileSync(file, "utf8").split(/\r?\n/).filter(Boolean);
+
+  for (const row of rows) {
+    const [postId, key, ...valueParts] = row.split("\t");
+    const value = valueParts.join("\t").trim();
+    if (!postId || !key || !value) {
+      continue;
+    }
+
+    if (!meta.has(postId)) {
+      meta.set(postId, {});
+    }
+
+    meta.get(postId)[key] = value;
+  }
+
+  return meta;
+}
+
 function cleanHtml(html = "") {
   return html
     .replace(/<script[\s\S]*?<\/script>/gi, "")
@@ -53,16 +90,22 @@ function headings(html = "") {
   }));
 }
 
-function normalizeWpItem(item, type) {
+function normalizeWpItem(item, type, metaByPostId) {
   const title = stripTags(item.title?.rendered || item.name || "");
   const html = cleanHtml(item.content?.rendered || item.description || "");
+  const meta = metaByPostId.get(String(item.id)) || {};
+  const rankTitle = stripTags(meta.rank_math_title || "");
+  const rankDescription = seoDescription(meta.rank_math_description || "", item.excerpt?.rendered || item.short_description || html);
+
   return {
     id: item.id,
     type,
     slug: item.slug,
     path: type === "product" ? `/producto/${item.slug}/` : `/${item.slug === "inicio" ? "" : `${item.slug}/`}`,
     title,
-    excerpt: stripTags(item.excerpt?.rendered || item.short_description || "").slice(0, 320),
+    excerpt: seoDescription(item.excerpt?.rendered || item.short_description || "", html),
+    seoTitle: rankTitle || title,
+    seoDescription: rankDescription,
     html,
     textLength: stripTags(html).length,
     headings: headings(html),
@@ -72,9 +115,10 @@ function normalizeWpItem(item, type) {
   };
 }
 
-const pages = readJson("pages-wpapi.json").map((item) => normalizeWpItem(item, "page"));
-const posts = readJson("posts-wpapi.json").map((item) => normalizeWpItem(item, "post"));
-const products = readJson("products-wpapi.json").map((item) => normalizeWpItem(item, "product"));
+const metaByPostId = readPostMeta();
+const pages = readJson("pages-wpapi.json").map((item) => normalizeWpItem(item, "page", metaByPostId));
+const posts = readJson("posts-wpapi.json").map((item) => normalizeWpItem(item, "post", metaByPostId));
+const products = readJson("products-wpapi.json").map((item) => normalizeWpItem(item, "product", metaByPostId));
 const media = readJson("media-wpapi.json").map((item) => ({
   id: item.id,
   slug: item.slug,
@@ -150,6 +194,18 @@ fs.writeFileSync(
     2,
   ),
 );
+fs.writeFileSync(
+  path.join(outDir, "questions-full.json"),
+  JSON.stringify(
+    {
+      total: questions.length,
+      questions,
+      modules: [...new Set(questions.map((question) => question.module).filter(Boolean))].sort(),
+    },
+    null,
+    2,
+  ),
+);
 
 console.log(`Generated ${pages.length} pages, ${posts.length} posts, ${products.length} products.`);
-console.log(`Generated ${questions.length} questions, sample exported to src/data/questions-sample.json.`);
+console.log(`Generated ${questions.length} questions, full dataset and sample exported to src/data/.`);

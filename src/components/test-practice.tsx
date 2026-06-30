@@ -1,31 +1,71 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import questionsData from "@/data/questions-sample.json";
 
 type Question = (typeof questionsData.questions)[number];
+type QuestionsResponse = {
+  total: number;
+  modules: string[];
+  module: string;
+  moduleTotal: number;
+  limit: number;
+  offset: number;
+  questions: Question[];
+};
 
 export function TestPractice() {
-  const [module, setModule] = useState("1");
+  const [module, setModule] = useState(questionsData.modules[0] || "1");
+  const [loadedModule, setLoadedModule] = useState(module);
+  const [moduleTotal, setModuleTotal] = useState(0);
+  const [questions, setQuestions] = useState<Question[]>(questionsData.questions);
   const [index, setIndex] = useState(0);
   const [selected, setSelected] = useState("");
   const [checked, setChecked] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const questions = useMemo(
-    () => questionsData.questions.filter((question) => question.module === module),
-    [module],
+  const moduleQuestions = useMemo(
+    () => questions.filter((question) => question.module === loadedModule),
+    [loadedModule, questions],
   );
-  const question: Question = questions[index % questions.length] || questionsData.questions[0];
+  const question: Question = moduleQuestions[index % moduleQuestions.length] || questionsData.questions[0];
+  const visibleCount = moduleQuestions.length;
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadQuestions() {
+      setLoading(true);
+
+      try {
+        const response = await fetch(`/api/questions?module=${encodeURIComponent(module)}&limit=200`, {
+          signal: controller.signal,
+        });
+        const data = (await response.json()) as QuestionsResponse;
+        setQuestions(data.questions);
+        setLoadedModule(data.module);
+        setModuleTotal(data.moduleTotal);
+        setIndex(0);
+        setSelected("");
+        setChecked(false);
+      } finally {
+        if (!controller.signal.aborted) {
+          setLoading(false);
+        }
+      }
+    }
+
+    loadQuestions();
+
+    return () => controller.abort();
+  }, [module]);
 
   function changeModule(nextModule: string) {
     setModule(nextModule);
-    setIndex(0);
-    setSelected("");
-    setChecked(false);
   }
 
   function nextQuestion() {
-    setIndex((value) => (value + 1) % questions.length);
+    setIndex((value) => (value + 1) % moduleQuestions.length);
     setSelected("");
     setChecked(false);
   }
@@ -34,14 +74,14 @@ export function TestPractice() {
     <section className="test-app" aria-labelledby="test-app-heading">
       <div className="test-app-head">
         <div>
-          <p className="eyebrow">Motor de test migrado</p>
-          <h2 id="test-app-heading">Practica con preguntas reales del WordPress original</h2>
+          <p className="eyebrow">Test online</p>
+          <h2 id="test-app-heading">Practica con preguntas reales de competencia profesional</h2>
           <p>
-            Hay {questionsData.total.toLocaleString("es-ES")} preguntas exportadas. Esta primera
-            versión carga una muestra funcional para validar formato, módulos, opciones y respuesta.
+            Banco completo con {questionsData.total.toLocaleString("es-ES")} preguntas exportadas,
+            organizadas por modulo y con comprobacion inmediata de respuesta.
           </p>
         </div>
-        <div className="module-tabs" aria-label="Seleccionar módulo">
+        <div className="module-tabs" aria-label="Seleccionar modulo">
           {questionsData.modules.map((item) => (
             <button
               key={item}
@@ -49,16 +89,21 @@ export function TestPractice() {
               className={item === module ? "active" : ""}
               onClick={() => changeModule(item)}
             >
-              Módulo {item}
+              Modulo {item}
             </button>
           ))}
         </div>
       </div>
 
-      <article className="question-card">
+      <article className="question-card" aria-busy={loading}>
         <div className="question-meta">
           <span>{question.code}</span>
           <span>{question.law}</span>
+          <span>
+            {loading
+              ? "Cargando..."
+              : `${Math.min(index + 1, visibleCount)} de ${moduleTotal || visibleCount}`}
+          </span>
         </div>
         <h3>{question.prompt}</h3>
         <div className="answer-list">

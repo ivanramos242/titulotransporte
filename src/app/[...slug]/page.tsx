@@ -18,6 +18,55 @@ function findMigratedContent(path: string) {
   );
 }
 
+function schemaForRoute(route: (typeof allRoutes)[number], title: string, description: string) {
+  const url = new URL(route.path, site.url).toString();
+  const breadcrumb = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    itemListElement: [
+      { "@type": "ListItem", position: 1, name: "Inicio", item: site.url },
+      { "@type": "ListItem", position: 2, name: title, item: url },
+    ],
+  };
+
+  if (route.type === "product") {
+    return [
+      breadcrumb,
+      {
+        "@context": "https://schema.org",
+        "@type": "Product",
+        name: title,
+        description,
+        brand: { "@type": "Organization", name: site.name },
+        offers: {
+          "@type": "Offer",
+          price: "99",
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          url,
+        },
+      },
+    ];
+  }
+
+  if (route.type === "post") {
+    return [
+      breadcrumb,
+      {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        headline: title,
+        description,
+        mainEntityOfPage: url,
+        publisher: { "@type": "Organization", name: site.name },
+        dateModified: route.lastModified,
+      },
+    ];
+  }
+
+  return [breadcrumb];
+}
+
 export async function generateStaticParams() {
   return allRoutes
     .filter((route) => route.path !== "/")
@@ -39,8 +88,8 @@ export async function generateMetadata({ params }: PageProps) {
   if (migratedContent) {
     return metadataFor({
       ...route,
-      title: migratedContent.title || route.title,
-      description: migratedContent.excerpt || route.description,
+      title: migratedContent.seoTitle || migratedContent.title || route.title,
+      description: migratedContent.seoDescription || migratedContent.excerpt || route.description,
       h1: migratedContent.title || route.h1,
     });
   }
@@ -64,13 +113,14 @@ export default async function MigratedRoutePage({ params }: PageProps) {
   const hasHtml = Boolean(migratedHtml);
   const isTestPage = route.path === "/test-competencia-profesional-mercancias/";
   const pageTitle = migratedContent?.title || route.h1;
-  const pageDescription = migratedContent?.excerpt || route.description;
+  const pageDescription = migratedContent?.seoDescription || migratedContent?.excerpt || route.description;
+  const schemas = schemaForRoute(route, pageTitle, pageDescription);
 
   return (
     <main>
       <section className="subhero">
         <p className="eyebrow">
-          {isPost ? "Guía migrada" : isProduct ? "Producto" : "Ruta heredada"}
+          {isPost ? "Guia" : isProduct ? "Producto" : "titulotransporte.com"}
         </p>
         <h1>{pageTitle}</h1>
         <p>{pageDescription}</p>
@@ -83,7 +133,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
             <a
               className="button primary"
               href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                `Quiero información sobre ${pageTitle}`,
+                `Quiero informacion sobre ${pageTitle}`,
               )}`}
             >
               Consultar por WhatsApp
@@ -99,13 +149,6 @@ export default async function MigratedRoutePage({ params }: PageProps) {
 
       {hasHtml ? (
         <article className="wp-content-shell">
-          <div className="wp-content-note">
-            <p className="eyebrow">Contenido original migrado</p>
-            <p>
-              Texto renderizado desde WordPress. La maquetación se está
-              transformando a componentes Next sin perder contenido ni slug.
-            </p>
-          </div>
           <div
             className="wp-content"
             dangerouslySetInnerHTML={{ __html: migratedHtml }}
@@ -114,20 +157,18 @@ export default async function MigratedRoutePage({ params }: PageProps) {
       ) : (
         <section className="section two-col">
           <div>
-            <p className="eyebrow">Estado de migración</p>
-            <h2>Ruta preparada para función privada</h2>
+            <p className="eyebrow">Acceso privado</p>
+            <h2>Contenido disponible para usuarios registrados</h2>
           </div>
           <div className="copy-stack">
             <p>
-              Esta ruta depende de funcionalidad privada de WordPress o de un
-              plugin: login, cuenta, checkout, membresía o profesor IA. La ruta
-              queda preservada y marcada según su intención mientras se porta la
-              lógica a Next.
+              Esta zona forma parte del area de alumnos y clientes. Accede a tu
+              cuenta o consulta el curso para ver las opciones disponibles.
             </p>
             {isProduct ? (
               <p>
-                Producto detectado: curso virtual y descargable con precio
-                actual de 99 EUR. La compra final se portará a Stripe Checkout.
+                Curso online para preparar la competencia profesional del
+                transporte con test, materiales digitales y apoyo de estudio.
               </p>
             ) : null}
           </div>
@@ -136,18 +177,14 @@ export default async function MigratedRoutePage({ params }: PageProps) {
 
       <section className="section dark-band">
         <div>
-          <p className="eyebrow">SEO de la ruta</p>
-          <h2>Señales técnicas ya preparadas</h2>
+          <p className="eyebrow">Siguiente paso</p>
+          <h2>Resuelve tus dudas sobre transporte</h2>
         </div>
         <ul className="check-list">
-          <li>Title y meta description específicos.</li>
-          <li>Canonical absoluto hacia la URL final.</li>
-          <li>{route.noindex ? "Noindex intencional." : "Indexable por defecto."}</li>
-          <li>
-            {hasHtml
-              ? "Contenido original visible en HTML renderizado."
-              : "Estructura lista para lógica privada."}
-          </li>
+          <li>Consulta requisitos antes de iniciar el tramite.</li>
+          <li>Revisa si te interesa alquilar, ceder o preparar el examen.</li>
+          <li>Accede a test y materiales de competencia profesional.</li>
+          <li>Habla con el equipo para estudiar tu caso concreto.</li>
         </ul>
       </section>
 
@@ -155,7 +192,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
         <section className="services">
           <div className="section-heading">
             <p className="eyebrow">Archivo editorial</p>
-            <h2>Guías detectadas en WordPress</h2>
+            <h2>Guias sobre transporte y competencia profesional</h2>
           </div>
           <div className="post-list">
             {blogPosts.slice(0, 12).map((post) => (
@@ -166,6 +203,11 @@ export default async function MigratedRoutePage({ params }: PageProps) {
           </div>
         </section>
       ) : null}
+
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(schemas) }}
+      />
     </main>
   );
 }
