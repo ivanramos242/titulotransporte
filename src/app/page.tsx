@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import { metadataFor, routeByPath, site } from "@/lib/site";
 
 const homeRoute = routeByPath("/")!;
@@ -52,7 +53,39 @@ export default function Home() {
 
   return (
     <main>
-      <section className="hero">
+      <section className="home-hero">
+        <div className="hero-stage" aria-hidden="true">
+          <Image
+            className="hero-orbit"
+            src="https://titulotransporte.com/wp-content/uploads/2025/09/Vector-282.svg"
+            alt=""
+            width={609}
+            height={633}
+            priority
+            unoptimized
+          />
+          <Image
+            className="hero-ia"
+            src="https://titulotransporte.com/wp-content/uploads/2025/09/ChatGPT-Image-18-sept-2025-19_48_04-1-e1758219879225.png"
+            alt=""
+            width={740}
+            height={802}
+            priority
+            sizes="(max-width: 960px) 58vw, 360px"
+          />
+          <div className="hero-course">
+            <Image
+              src="https://titulotransporte.com/wp-content/uploads/2025/08/Curso-titulo-transporte.png"
+              alt=""
+              width={1080}
+              height={1080}
+              priority
+              sizes="190px"
+            />
+            <span>Curso online</span>
+          </div>
+        </div>
+
         <div className="hero-copy">
           <p className="eyebrow">Título de transporte · España</p>
           <h1>{homeRoute.h1}</h1>
@@ -70,6 +103,7 @@ export default function Home() {
             </Link>
           </div>
         </div>
+
         <div className="hero-panel" aria-label="Opciones de título de transporte">
           <span className="panel-kicker">Alquiler · cesión · formación</span>
           <strong>Una ruta clara para operar o prepararte</strong>
@@ -94,7 +128,7 @@ export default function Home() {
         ))}
       </section>
 
-      <section className="section two-col">
+      <section className="section two-col home-intent">
         <div>
           <p className="eyebrow">Intención principal</p>
           <h2>Para empresas que necesitan operar con título de transporte</h2>
@@ -123,7 +157,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="section dark-band">
+      <section className="section dark-band decision-band">
         <div>
           <p className="eyebrow">Sin atajos confusos</p>
           <h2>Decisiones claras antes de mover dinero o presentar trámites</h2>

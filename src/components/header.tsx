@@ -35,6 +35,23 @@ export function Header() {
       >
         WhatsApp
       </a>
+      <details className="mobile-nav">
+        <summary aria-label="Abrir menú de navegación">Menú</summary>
+        <nav aria-label="Navegación móvil">
+          {navigation.map((item) => (
+            <Link key={item.href} href={item.href}>
+              {item.label}
+            </Link>
+          ))}
+          <a
+            href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+              "Quiero información sobre el título de transporte",
+            )}`}
+          >
+            WhatsApp
+          </a>
+        </nav>
+      </details>
     </header>
   );
 }
