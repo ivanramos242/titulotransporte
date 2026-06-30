@@ -1,0 +1,11 @@
+.git
+.next
+node_modules
+npm-debug.log*
+coverage
+out
+build
+.env*
+Acceso servidor Contabo
+migration-export
+work

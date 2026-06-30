@@ -1,0 +1,264 @@
+import type { Metadata } from "next";
+
+export const site = {
+  name: "titulotransporte.com",
+  url: "https://titulotransporte.com",
+  phone: "+34 640 15 52 23",
+  whatsapp: "34640155223",
+  email: "hola@titulotransporte.com",
+};
+
+export type RouteRecord = {
+  path: string;
+  title: string;
+  description: string;
+  h1: string;
+  type: "page" | "post" | "product" | "legal" | "account";
+  lastModified?: string;
+  noindex?: boolean;
+};
+
+export const migratedRoutes: RouteRecord[] = [
+  {
+    path: "/",
+    title: "Alquilar título de transporte | Empieza a operar antes",
+    description:
+      "Asesoramiento para alquilar, ceder o conseguir tu título de transporte. Habla con un especialista y elige la vía adecuada para tu empresa.",
+    h1: "Alquila o consigue tu título de transporte con una ruta clara",
+    type: "page",
+    lastModified: "2025-09-26",
+  },
+  {
+    path: "/test-competencia-profesional-mercancias/",
+    title: "Test competencia profesional mercancías | Practica con IA",
+    description:
+      "Practica test y casos de competencia profesional de mercancías con preguntas organizadas, simulacros y apoyo de profesor IA.",
+    h1: "Test de competencia profesional de mercancías",
+    type: "page",
+    lastModified: "2025-12-05",
+  },
+  {
+    path: "/producto/curso-titulo-profesional-transporte/",
+    title: "Curso título transporte 2026 | Formación online",
+    description:
+      "Curso online para preparar el título de competencia profesional del transporte. Temario, test, profesor IA y acceso digital.",
+    h1: "Curso para el título de competencia profesional del transporte",
+    type: "product",
+    lastModified: "2026-06-28",
+  },
+  {
+    path: "/profesor-ia/",
+    title: "Profesor IA para título de transporte | Ayuda de estudio",
+    description:
+      "Resuelve dudas sobre el temario del título de transporte con un profesor IA pensado para estudiar competencia profesional de mercancías.",
+    h1: "Profesor IA para estudiar el título de transporte",
+    type: "page",
+    lastModified: "2025-09-18",
+  },
+  {
+    path: "/titulos/",
+    title: "Títulos de transporte | Opciones para operar",
+    description:
+      "Información sobre títulos de transporte, alquiler, cesión y requisitos para empresas de transporte de mercancías.",
+    h1: "Títulos de transporte para empresas y autónomos",
+    type: "page",
+    lastModified: "2025-09-16",
+  },
+  {
+    path: "/cede-tu-titulo-de-transporte/",
+    title: "Cede tu título de transporte | Monetiza tu capacitación",
+    description:
+      "Si tienes título de transporte, te ayudamos a estudiar opciones para cederlo de forma ordenada y con acompañamiento.",
+    h1: "Cede tu título de transporte con acompañamiento",
+    type: "page",
+    lastModified: "2025-09-15",
+  },
+  {
+    path: "/servicios-asesoria-legal-para-transporte/",
+    title: "Asesoría legal para transporte | Servicios",
+    description:
+      "Servicios de asesoría para transporte: títulos, trámites, cumplimiento normativo y orientación para operar con seguridad.",
+    h1: "Asesoría legal para transporte",
+    type: "page",
+    lastModified: "2024-04-25",
+  },
+  {
+    path: "/sobre-nosotros/",
+    title: "Sobre nosotros | titulotransporte.com",
+    description:
+      "Conoce el equipo de titulotransporte.com y cómo ayudamos a empresas y profesionales del transporte.",
+    h1: "Especialistas en título de transporte",
+    type: "page",
+    lastModified: "2025-09-15",
+  },
+  {
+    path: "/contacto/",
+    title: "Contacto | titulotransporte.com",
+    description:
+      "Contacta con titulotransporte.com por teléfono, WhatsApp o formulario para resolver dudas sobre título de transporte.",
+    h1: "Hablemos de tu caso",
+    type: "page",
+    lastModified: "2025-09-15",
+  },
+  {
+    path: "/blog/",
+    title: "Blog sobre transporte y competencia profesional",
+    description:
+      "Guías sobre competencia profesional, gestor de transporte, LOTT, ROTT, tacógrafo, fiscalidad y gestión de empresas de transporte.",
+    h1: "Blog de competencia profesional y transporte",
+    type: "page",
+    lastModified: "2026-01-17",
+  },
+  {
+    path: "/carrito/",
+    title: "Carrito | titulotransporte.com",
+    description: "Revisa los productos añadidos antes de finalizar la compra.",
+    h1: "Carrito",
+    type: "account",
+    lastModified: "2025-08-26",
+    noindex: true,
+  },
+  {
+    path: "/finalizar-compra/",
+    title: "Finalizar compra | titulotransporte.com",
+    description: "Completa el pago de tu curso o suscripción.",
+    h1: "Finalizar compra",
+    type: "account",
+    lastModified: "2025-09-14",
+    noindex: true,
+  },
+  {
+    path: "/mi-cuenta/",
+    title: "Mi cuenta | titulotransporte.com",
+    description: "Accede a tu cuenta, compras y contenidos.",
+    h1: "Mi cuenta",
+    type: "account",
+    lastModified: "2025-09-22",
+    noindex: true,
+  },
+  {
+    path: "/login/",
+    title: "Login | titulotransporte.com",
+    description: "Inicia sesión en titulotransporte.com.",
+    h1: "Iniciar sesión",
+    type: "account",
+    lastModified: "2025-09-22",
+    noindex: true,
+  },
+  {
+    path: "/register/",
+    title: "Registro | titulotransporte.com",
+    description: "Crea tu cuenta en titulotransporte.com.",
+    h1: "Crear cuenta",
+    type: "account",
+    lastModified: "2025-09-22",
+    noindex: true,
+  },
+  {
+    path: "/politica-de-cookies-ue/",
+    title: "Política de cookies | titulotransporte.com",
+    description: "Consulta la política de cookies de titulotransporte.com.",
+    h1: "Política de cookies",
+    type: "legal",
+    lastModified: "2025-08-27",
+  },
+  {
+    path: "/politica-de-privacidad/",
+    title: "Política de privacidad | titulotransporte.com",
+    description: "Consulta cómo tratamos los datos personales en titulotransporte.com.",
+    h1: "Política de privacidad",
+    type: "legal",
+    lastModified: "2025-08-28",
+  },
+  {
+    path: "/politica-de-devoluciones/",
+    title: "Política de devoluciones | titulotransporte.com",
+    description: "Consulta las condiciones de devolución de titulotransporte.com.",
+    h1: "Política de devoluciones",
+    type: "legal",
+    lastModified: "2025-08-28",
+  },
+  {
+    path: "/terminos-y-condiciones-de-compra/",
+    title: "Términos y condiciones de compra | titulotransporte.com",
+    description: "Consulta los términos y condiciones de compra de titulotransporte.com.",
+    h1: "Términos y condiciones de compra",
+    type: "legal",
+    lastModified: "2025-08-28",
+  },
+];
+
+export const blogPosts: RouteRecord[] = [
+  "como-es-el-examen-de-competencia-profesional-de-mercancias-formato-tiempos-y-que-estudiar",
+  "plan-de-estudio-en-30-dias-para-aprobar-competencia-profesional-mercancias",
+  "plan-de-estudio-en-6-semanas-trabajando-competencia-profesional-mercancias",
+  "errores-que-te-hacen-suspender-el-examen-de-transportista-y-como-evitarlos",
+  "como-usar-tests-oficiales-para-aprobar-metodo-en-3-pasos",
+  "simulacro-completo-como-medir-tu-nivel-y-decidir-si-estas-listo",
+  "supuestos-practicos-metodo-paso-a-paso-para-resolverlos-plantilla-incluida",
+  "como-memorizar-el-temario-de-transportista-tecnicas-que-si-funcionan",
+  "acceso-a-la-profesion-requisitos-clave-explicados-facil-mercancias",
+  "gestion-comercial-como-calcular-precios-y-presupuestos-en-transporte",
+  "normas-tecnicas-y-explotacion-conceptos-que-mas-caen-en-el-test",
+  "seguridad-vial-y-prevencion-lo-imprescindible-para-aprobar-mercancias",
+  "lott-y-rott-que-son-y-como-te-afectan-resumen-practico",
+  "autorizaciones-mdl-y-mdp-diferencias-requisitos-y-como-solicitarlas",
+  "capacidad-financiera-en-transporte-cuanto-necesitas-y-como-acreditarla",
+  "honorabilidad-en-transporte-que-es-como-se-pierde-y-como-evitar-problemas",
+  "que-hace-un-gestor-de-transporte-funciones-y-responsabilidades",
+  "casos-practicos-gestor-de-transporte-en-autonomo-vs-sociedad",
+  "como-crear-una-empresa-de-transporte-checklist-de-requisitos-y-tramites",
+  "costes-fijos-y-variables-en-transporte-guia-con-ejemplo-real",
+  "como-calcular-el-precio-por-kilometro-km-en-transporte-de-mercancias",
+  "rentabilidad-en-transporte-margen-minimo-errores-y-como-mejorarlo",
+  "fiscalidad-basica-del-transportista-iva-irpf-y-gastos-deducibles",
+  "subcontratacion-en-transporte-cuando-conviene-y-que-riesgos-tiene",
+  "carta-de-porte-cmr-que-es-como-se-rellena-y-ejemplos",
+  "tacografo-digital-guia-rapida-para-el-examen-normas-y-obligaciones",
+  "descansos-diarios-y-semanales-reglas-y-ejemplos-para-no-confundirte",
+  "sanciones-por-tacografo-infracciones-tipicas-y-como-evitarlas",
+  "inspeccion-de-transporte-que-revisan-y-como-prepararte",
+  "prevencion-de-riesgos-en-transporte-checklist-de-seguridad-para-empresas",
+].map((slug) => ({
+  path: `/${slug}/`,
+  title: slug
+    .split("-")
+    .map((word) => word[0]?.toUpperCase() + word.slice(1))
+    .join(" "),
+  description:
+    "Guía de titulotransporte.com pendiente de migración editorial desde WordPress.",
+  h1: slug
+    .split("-")
+    .map((word) => word[0]?.toUpperCase() + word.slice(1))
+    .join(" "),
+  type: "post",
+  lastModified: "2026-02-23",
+}));
+
+export const allRoutes = [...migratedRoutes, ...blogPosts];
+
+export function routeByPath(path: string) {
+  const normalized = path.endsWith("/") ? path : `${path}/`;
+  return allRoutes.find((route) => route.path === normalized);
+}
+
+export function metadataFor(route: RouteRecord): Metadata {
+  const canonical = new URL(route.path, site.url).toString();
+
+  return {
+    title: route.title,
+    description: route.description,
+    alternates: { canonical },
+    robots: route.noindex
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
+    openGraph: {
+      type: route.type === "product" ? "website" : "article",
+      locale: "es_ES",
+      siteName: site.name,
+      title: route.title,
+      description: route.description,
+      url: canonical,
+    },
+  };
+}
