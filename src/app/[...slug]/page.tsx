@@ -1,6 +1,8 @@
 import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { auth } from "../../../auth";
+import { CommercialRoutePage } from "@/components/commercial-pages";
 import { TestPractice } from "@/components/test-practice";
 import wpContent from "@/data/wp-content.json";
 import { allRoutes, blogPosts, metadataFor, routeByPath, site } from "@/lib/site";
@@ -28,32 +30,32 @@ const routeVisuals: Record<string, { label: string; image: string; accent: strin
   },
   "/cede-tu-titulo-de-transporte/": {
     label: "Cesión de título",
-    image: "/home-assets/audience.webp",
+    image: "/home-assets/consulting-team-clean.webp",
     accent: "Convierte tu capacitación en una oportunidad segura.",
   },
   "/producto/curso-titulo-profesional-transporte/": {
     label: "Curso online",
-    image: "/home-assets/course.webp",
+    image: "/home-assets/course-platform-clean.webp",
     accent: "Preparación práctica para el examen oficial.",
   },
   "/profesor-ia/": {
     label: "Profesor IA",
-    image: "/home-assets/ai.webp",
+    image: "/home-assets/ai-support-clean.webp",
     accent: "Resuelve dudas de normativa cuando lo necesites.",
   },
   "/test-competencia-profesional-mercancias/": {
     label: "Plataforma test",
-    image: "/home-assets/course.webp",
+    image: "/home-assets/course-platform-clean.webp",
     accent: "Practica con preguntas y seguimiento de progreso.",
   },
   "/servicios-asesoria-legal-para-transporte/": {
     label: "Asesoría de transporte",
-    image: "/home-assets/trust.webp",
+    image: "/home-assets/trust-team-clean.webp",
     accent: "Gestión clara, documentación y cumplimiento normativo.",
   },
   "/sobre-nosotros/": {
     label: "Equipo experto",
-    image: "/home-assets/benefits.webp",
+    image: "/home-assets/driver-truck-clean.webp",
     accent: "Especialistas en empresas y autónomos del transporte.",
   },
   "/contacto/": {
@@ -63,7 +65,7 @@ const routeVisuals: Record<string, { label: string; image: string; accent: strin
   },
   "/blog/": {
     label: "Recursos",
-    image: "/home-assets/services.webp",
+    image: "/home-assets/logistics-screen-clean.webp",
     accent: "Guías sobre normativa, gestor y competencia profesional.",
   },
 };
@@ -168,6 +170,16 @@ export async function generateMetadata({ params }: PageProps) {
     return {};
   }
 
+  if (
+    path === "/cede-tu-titulo-de-transporte/" ||
+    path === "/titulos/" ||
+    path === "/servicios-asesoria-legal-para-transporte/" ||
+    path === "/producto/curso-titulo-profesional-transporte/" ||
+    path === "/test-competencia-profesional-mercancias/"
+  ) {
+    return metadataFor(route);
+  }
+
   const migratedContent = findMigratedContent(path);
   if (migratedContent) {
     const title = migratedContent.hasRankTitle ? migratedContent.seoTitle : route.title;
@@ -188,10 +200,16 @@ export async function generateMetadata({ params }: PageProps) {
 
 export default async function MigratedRoutePage({ params }: PageProps) {
   const { slug } = await params;
-  const route = routeByPath(pathFromSlug(slug));
+  const path = pathFromSlug(slug);
+  const route = routeByPath(path);
 
   if (!route) {
     notFound();
+  }
+
+  const commercialPage = CommercialRoutePage({ path });
+  if (commercialPage) {
+    return commercialPage;
   }
 
   const isProduct = route.type === "product";
@@ -201,12 +219,15 @@ export default async function MigratedRoutePage({ params }: PageProps) {
   const migratedContent = findMigratedContent(route.path);
   const migratedHtml = normalizeLegacyHtml(migratedContent?.html || "");
   const hasHtml = Boolean(migratedHtml);
-  const pageTitle = migratedContent?.title || route.h1;
-  const pageDescription = migratedContent?.hasRankDescription
+  const pageTitle = isTestPage ? route.h1 : migratedContent?.title || route.h1;
+  const pageDescription = isTestPage
+    ? route.description
+    : migratedContent?.hasRankDescription
     ? migratedContent.seoDescription
     : route.description;
   const schemas = schemaForRoute(route, pageTitle, pageDescription);
   const visual = routeVisualFor(route, isPost, isProduct);
+  const session = isTestPage ? await auth() : null;
   const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
     `Quiero información sobre ${pageTitle}`,
   )}`;
@@ -245,10 +266,11 @@ export default async function MigratedRoutePage({ params }: PageProps) {
 
       {isTestPage ? (
         <section className="inner-wide">
-          <TestPractice />
+          <TestPractice isAuthenticated={Boolean(session?.user)} userName={session?.user?.name} />
         </section>
       ) : null}
 
+      {!isTestPage ? (
       <div className="inner-layout">
         {hasHtml ? (
           <article className="wp-content-shell">
@@ -283,6 +305,27 @@ export default async function MigratedRoutePage({ params }: PageProps) {
           </nav>
         </aside>
       </div>
+      ) : (
+        <section className="test-after">
+          <article>
+            <p className="tt-label">Cómo aprovecharla</p>
+            <h2>Entrena por bloques, revisa fallos y vuelve a intentarlo</h2>
+            <p>
+              La plataforma está pensada para practicar como en un banco real de examen: eliges módulo,
+              respondes, compruebas al momento y avanzas con un marcador de aciertos y fallos.
+            </p>
+          </article>
+          <article>
+            <p className="tt-label">Acceso y cuenta</p>
+            <h2>Funciona para invitados y usuarios registrados</h2>
+            <p>
+              Sin iniciar sesión puedes practicar gratis. Con cuenta, la plataforma queda preparada para
+              vincular progreso, compras y recursos privados cuando se active la base de datos de usuarios.
+            </p>
+            <Link className="tt-btn tt-btn-primary" href="/login/">Iniciar sesión</Link>
+          </article>
+        </section>
+      )}
 
       <section className="inner-final">
         <div>

@@ -1,29 +1,36 @@
-﻿import Link from "next/link";
+import Link from "next/link";
+import {
+  faClock,
+  faHeadset,
+  faShieldHalved,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { site } from "@/lib/site";
 
 const navigation = [
-  { href: "/titulos/", label: "Alquiler de tÃ­tulo" },
-  { href: "/cede-tu-titulo-de-transporte/", label: "Ceder tÃ­tulo" },
+  { href: "/titulos/", label: "Alquiler de título" },
+  { href: "/cede-tu-titulo-de-transporte/", label: "Ceder título" },
   { href: "/producto/curso-titulo-profesional-transporte/", label: "Curso" },
   { href: "/profesor-ia/", label: "Profesor IA" },
   { href: "/blog/", label: "Recursos" },
+  { href: "/mi-cuenta/", label: "Mi cuenta" },
   { href: "/sobre-nosotros/", label: "Nosotros" },
 ];
 
 export function Header() {
   const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-    "Hola, quiero informaciÃ³n sobre el tÃ­tulo de transportista.",
+    "Hola, quiero información sobre el título de transportista.",
   )}`;
 
   return (
     <>
       <div className="tt-topbar">
-        <span>Especialistas en alquiler y cesiÃ³n de tÃ­tulos de transportista</span>
-        <span>+15 aÃ±os ayudando a empresas y autÃ³nomos del transporte</span>
-        <span>AtenciÃ³n personalizada: {site.phone}</span>
+        <span><FontAwesomeIcon icon={faShieldHalved} /> Especialistas en alquiler y cesión de títulos de transportista</span>
+        <span><FontAwesomeIcon icon={faClock} /> +15 años ayudando a empresas y autónomos del transporte</span>
+        <span><FontAwesomeIcon icon={faHeadset} /> Atención personalizada: {site.phone}</span>
       </div>
       <header className="site-header">
-        <Link href="/" className="brand" aria-label="Ir a la pÃ¡gina de inicio">
+        <Link href="/" className="brand" aria-label="Ir a la página de inicio">
           <span
             className="brand-mark"
             aria-hidden="true"
@@ -31,11 +38,11 @@ export function Header() {
           />
           <span>
             <strong>TITULOTRANSPORTE</strong>
-            <small>GESTORÃA DE TRANSPORTE</small>
+            <small>GESTORÍA DE TRANSPORTE</small>
           </span>
         </Link>
 
-        <nav className="desktop-nav" aria-label="NavegaciÃ³n principal">
+        <nav className="desktop-nav" aria-label="Navegación principal">
           {navigation.map((item) => (
             <Link key={item.href} href={item.href}>
               {item.label}
@@ -44,17 +51,14 @@ export function Header() {
         </nav>
 
         <div className="header-actions">
-          <a className="header-phone" href={`tel:${site.phone.replaceAll(" ", "")}`}>
-            {site.phone}
-          </a>
-          <a className="header-cta" href={whatsappUrl}>
-            WhatsApp
-          </a>
+          <Link className="header-cta" href="/contacto/">
+            Contacto
+          </Link>
         </div>
 
         <details className="mobile-nav">
-          <summary aria-label="Abrir menÃº de navegaciÃ³n">MenÃº</summary>
-          <nav aria-label="NavegaciÃ³n mÃ³vil">
+          <summary aria-label="Abrir menú de navegación">Menú</summary>
+          <nav aria-label="Navegación móvil">
             {navigation.map((item) => (
               <Link key={item.href} href={item.href}>
                 {item.label}
@@ -68,4 +72,3 @@ export function Header() {
     </>
   );
 }
-

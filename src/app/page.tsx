@@ -1,6 +1,27 @@
 import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
+import type { IconDefinition } from "@fortawesome/fontawesome-svg-core";
+import {
+  faBoxOpen,
+  faBrain,
+  faClock,
+  faFileLines,
+  faGraduationCap,
+  faHandshake,
+  faHeadset,
+  faMapLocationDot,
+  faPenNib,
+  faRightLeft,
+  faRotateRight,
+  faShieldHalved,
+  faStar,
+  faTruck,
+  faUser,
+  faUserTie,
+  faUsers,
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { site } from "@/lib/site";
 
 const whatsappBase = `https://wa.me/${site.whatsapp}`;
@@ -29,13 +50,13 @@ export const metadata: Metadata = {
 
 const images = {
   hero: "/home-assets/hero.webp",
-  audience: "/home-assets/audience.webp",
-  services: "/home-assets/services.webp",
+  audience: "/home-assets/consulting-team-clean.webp",
+  services: "/home-assets/logistics-screen-clean.webp",
   process: "/home-assets/process.webp",
-  benefits: "/home-assets/benefits.webp",
-  trust: "/home-assets/trust.webp",
-  course: "/home-assets/course.webp",
-  ai: "/home-assets/ai.webp",
+  benefits: "/home-assets/driver-truck-clean.webp",
+  trust: "/home-assets/trust-team-clean.webp",
+  course: "/home-assets/course-platform-clean.webp",
+  ai: "/home-assets/ai-support-clean.webp",
   faq: "/home-assets/faq.webp",
   final: "/home-assets/final.webp",
 };
@@ -159,31 +180,29 @@ const faqs = [
 ];
 
 function Icon({ name }: { name: string }) {
-  const paths: Record<string, string[]> = {
-    advisor: ["M12 6a4 4 0 1 0 0 8a4 4 0 0 0 0-8Z", "M6 21a6 6 0 0 1 12 0"],
-    brain: ["M8 8a4 4 0 0 1 8 0", "M8 8a4 4 0 0 0 0 8", "M16 8a4 4 0 0 1 0 8", "M9 16v3", "M15 16v3"],
-    box: ["M4 7l8-4 8 4-8 4-8-4Z", "M4 7v10l8 4 8-4V7", "M12 11v10"],
-    cap: ["M3 9l9-5 9 5-9 5-9-5Z", "M7 11v5c3 2 7 2 10 0v-5"],
-    clock: ["M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z", "M12 7v5l3 2"],
-    deal: ["M8 12l3 3 5-6", "M4 12a8 8 0 0 1 13-6", "M20 12a8 8 0 0 1-13 6"],
-    doc: ["M7 3h7l4 4v14H7V3Z", "M14 3v5h5", "M9 13h6", "M9 17h6"],
-    map: ["M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3Z", "M9 3v15", "M15 6v15"],
-    pen: ["M4 20l4-1 10-10-3-3L5 16l-1 4Z", "M14 6l3 3"],
-    refresh: ["M20 12a8 8 0 0 1-14 5", "M4 12a8 8 0 0 1 14-5", "M18 3v4h-4", "M6 21v-4h4"],
-    shield: ["M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3Z", "M9 12l2 2 4-5"],
-    spark: ["M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"],
-    support: ["M5 13v-2a7 7 0 0 1 14 0v2", "M5 13h3v5H5v-5Z", "M16 13h3v5h-3v-5Z", "M16 18c0 2-2 3-4 3"],
-    swap: ["M7 7h11l-3-3", "M17 17H6l3 3", "M18 7l-3 3", "M6 17l3-3"],
-    team: ["M8 11a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z", "M16 11a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z", "M3 21a5 5 0 0 1 10 0", "M11 21a5 5 0 0 1 10 0"],
-    truck: ["M3 7h11v9H3V7Z", "M14 10h4l3 3v3h-7v-6Z", "M7 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4Z", "M17 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4Z"],
-    user: ["M12 11a4 4 0 1 0 0-8a4 4 0 0 0 0 8Z", "M5 21a7 7 0 0 1 14 0"],
+  const icons: Record<string, IconDefinition> = {
+    advisor: faUserTie,
+    brain: faBrain,
+    box: faBoxOpen,
+    cap: faGraduationCap,
+    clock: faClock,
+    deal: faHandshake,
+    doc: faFileLines,
+    map: faMapLocationDot,
+    pen: faPenNib,
+    refresh: faRotateRight,
+    shield: faShieldHalved,
+    spark: faStar,
+    support: faHeadset,
+    swap: faRightLeft,
+    team: faUsers,
+    truck: faTruck,
+    user: faUser,
   };
 
   return (
     <span className="tt-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-        {(paths[name] || paths.shield).map((d) => <path key={d} d={d} />)}
-      </svg>
+      <FontAwesomeIcon icon={icons[name] ?? faShieldHalved} />
     </span>
   );
 }
@@ -291,7 +310,11 @@ export default function Home() {
       <section className="tt-hero">
         <div className="tt-hero-copy">
           <SectionLabel>Soluciones rápidas, legales y sin complicaciones</SectionLabel>
-          <h1>Alquila tu título de transportista y empieza a trabajar antes</h1>
+          <h1>
+            Alquila tu título<br />
+            de transportista y<br />
+            <span>empieza a trabajar antes</span>
+          </h1>
           <p>
             Te ayudamos a cumplir con la normativa y poner en marcha tu negocio de transporte por carretera sin demoras.
             Soluciones flexibles, 100% legales y con el respaldo de un equipo de expertos.
@@ -327,6 +350,41 @@ export default function Home() {
         <div><Icon name="clock" /><strong>24/48 h</strong><span>Tiempo medio de activación</span></div>
         <div><Icon name="shield" /><strong>100% legal</strong><span>Cumplimiento de la normativa vigente</span></div>
         <div><Icon name="support" /><strong>Soporte experto</strong><span>Acompañamiento continuo</span></div>
+      </section>
+
+      <section className="tt-section tt-managers">
+        <div className="tt-managers-copy">
+          <SectionLabel>Los mejores gestores</SectionLabel>
+          <h2>¿Buscas una gestión eficiente para tu negocio de transporte?</h2>
+          <p>
+            En Titulotransporte.com te brindamos una gestión integral y profesional. Ofrecemos servicios completos
+            de gestión de transporte para que tu operación logística avance con documentación clara, seguimiento
+            experto y cumplimiento de las regulaciones vigentes.
+          </p>
+          <div className="tt-actions">
+            <Link className="tt-btn tt-btn-primary" href="/titulos/">Alquilar título transporte</Link>
+            <Link className="tt-btn tt-btn-secondary" href="/producto/curso-titulo-profesional-transporte/">Curso título transporte</Link>
+          </div>
+        </div>
+        <div className="tt-managers-panel">
+          <article>
+            <span>Tu mejor opción</span>
+            <h3>Alquilar Título Transporte</h3>
+            <p>
+              Ofrecemos títulos sin permanencia a precios accesibles. Es una opción pensada para quienes quieren
+              empezar a trabajar mientras estudian o consolidan su actividad en transporte de mercancías.
+            </p>
+          </article>
+          <article>
+            <span>Curso Título Transporte 2026</span>
+            <h3>Oferta curso online</h3>
+            <p>
+              Domina con enfoque práctico el ciclo del transporte: autorizaciones, CMR, ADR, ATP, logística,
+              estiba, aduanas, fiscalidad internacional, normativa técnica y seguridad vial.
+            </p>
+            <strong><del>200,00 €</del> 99,00 €</strong>
+          </article>
+        </div>
       </section>
 
       <section className="tt-section tt-audience">

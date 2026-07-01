@@ -31,19 +31,19 @@ export const migratedRoutes: RouteRecord[] = [
   },
   {
     path: "/test-competencia-profesional-mercancias/",
-    title: "Test competencia profesional mercancías | Practica con IA",
+    title: "Test competencia profesional mercancías | Titulotransporte",
     description:
-      "Practica test y casos de competencia profesional de mercancías con preguntas organizadas, simulacros y apoyo de profesor IA.",
+      "Practica test de competencia profesional de mercancías por módulos, con corrección inmediata y banco completo de preguntas para preparar el examen.",
     h1: "Test de competencia profesional de mercancías",
     type: "page",
     lastModified: "2025-12-05",
   },
   {
     path: "/producto/curso-titulo-profesional-transporte/",
-    title: "Curso título transporte 2026 | Formación online",
+    title: "Curso título transporte 2026 | Titulotransporte",
     description:
-      "Curso online para preparar el título de competencia profesional del transporte. Temario, test, profesor IA y acceso digital.",
-    h1: "Curso para el título de competencia profesional del transporte",
+      "Curso online para preparar el título de competencia profesional del transporte 2026. Temario práctico, normativa España y UE, test y acceso desde cualquier dispositivo.",
+    h1: "Curso para Título de Competencia Profesional del Transporte 2026",
     type: "product",
     lastModified: "2026-06-28",
   },
@@ -58,30 +58,30 @@ export const migratedRoutes: RouteRecord[] = [
   },
   {
     path: "/titulos/",
-    title: "Títulos de transporte | Opciones para operar",
+    title: "Alquilar título de transporte | Titulotransporte",
     description:
-      "Información sobre títulos de transporte, alquiler, cesión y requisitos para empresas de transporte de mercancías.",
-    h1: "Títulos de transporte para empresas y autónomos",
+      "Alquila un título de transporte para empezar a operar con acompañamiento experto. Opciones disponibles desde 420 € al mes según plazas y condiciones.",
+    h1: "Alquila alguno de nuestros títulos",
     type: "page",
-    lastModified: "2025-09-16",
+    lastModified: "2026-07-01",
   },
   {
     path: "/cede-tu-titulo-de-transporte/",
-    title: "Cede tu título de transporte | Monetiza tu capacitación",
+    title: "Cede tu título de transporte | Titulotransporte",
     description:
-      "Si tienes título de transporte, te ayudamos a estudiar opciones para cederlo de forma ordenada y con acompañamiento.",
-    h1: "Cede tu título de transporte con acompañamiento",
+      "Cede tu título de transporte con asesoramiento experto. Revisa opciones para liberar recursos, ganar rentabilidad y mantener un proceso claro.",
+    h1: "Cede tu título de transporte",
     type: "page",
-    lastModified: "2025-09-15",
+    lastModified: "2026-07-01",
   },
   {
     path: "/servicios-asesoria-legal-para-transporte/",
-    title: "Asesoría legal para transporte | Servicios",
+    title: "Asesoría legal para transporte | Titulotransporte",
     description:
-      "Servicios de asesoría para transporte: títulos, trámites, cumplimiento normativo y orientación para operar con seguridad.",
+      "Asesoría legal especializada para empresas de transporte y autónomos: contratos, cumplimiento normativo, protección legal y acompañamiento.",
     h1: "Asesoría legal para transporte",
     type: "page",
-    lastModified: "2024-04-25",
+    lastModified: "2026-07-01",
   },
   {
     path: "/sobre-nosotros/",
@@ -131,10 +131,10 @@ export const migratedRoutes: RouteRecord[] = [
   {
     path: "/mi-cuenta/",
     title: "Mi cuenta | titulotransporte.com",
-    description: "Accede a tu cuenta, compras y contenidos.",
+    description: "Accede a tu cuenta de cliente o alumno.",
     h1: "Mi cuenta",
     type: "account",
-    lastModified: "2025-09-22",
+    lastModified: "2025-09-19",
     noindex: true,
   },
   {
@@ -143,16 +143,16 @@ export const migratedRoutes: RouteRecord[] = [
     description: "Inicia sesión en titulotransporte.com.",
     h1: "Iniciar sesión",
     type: "account",
-    lastModified: "2025-09-22",
+    lastModified: "2025-08-25",
     noindex: true,
   },
   {
     path: "/register/",
     title: "Registro | titulotransporte.com",
     description: "Crea tu cuenta en titulotransporte.com.",
-    h1: "Crear cuenta",
+    h1: "Registro",
     type: "account",
-    lastModified: "2025-09-22",
+    lastModified: "2025-08-25",
     noindex: true,
   },
   {
@@ -161,7 +161,7 @@ export const migratedRoutes: RouteRecord[] = [
     description: "Consulta la política de cookies de titulotransporte.com.",
     h1: "Política de cookies",
     type: "legal",
-    lastModified: "2025-08-27",
+    lastModified: "2025-08-28",
   },
   {
     path: "/politica-de-privacidad/",

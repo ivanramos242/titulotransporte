@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Footer } from "@/components/footer";
 import { Header } from "@/components/header";
+import { CookieBanner } from "@/components/cookie-banner";
 import { site } from "@/lib/site";
 import "./globals.css";
 
@@ -25,6 +26,13 @@ export const metadata: Metadata = {
     "Alquiler, cesión, curso y test para título de transporte y competencia profesional de mercancías.",
   applicationName: site.name,
   authors: [{ name: site.name }],
+  icons: {
+    icon: [
+      { url: "/icon.png", type: "image/png" },
+      { url: "/brand/titulotransporte-logo-mark.png", type: "image/png" },
+    ],
+    apple: "/apple-icon.png",
+  },
   openGraph: {
     locale: "es_ES",
     siteName: site.name,
@@ -57,6 +65,7 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <CookieBanner />
       </body>
     </html>
   );
