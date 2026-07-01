@@ -145,7 +145,6 @@ const aiBenefits = [
 const resources = [
   ["PDF", "Guía para alquilar un título de transportista", "Qué revisar, qué preguntar y qué errores evitar antes de decidir.", "/blog/"],
   ["Checklist", "Checklist para empezar en transporte", "Requisitos, pasos y documentación básica para avanzar con más claridad.", "/titulos/"],
-  ["Test online", "Test de competencia profesional", "Practica con preguntas reales y mide tu progreso antes del examen.", "/test-competencia-profesional-mercancias/"],
 ];
 
 const faqs = [
@@ -593,6 +592,35 @@ export default function Home() {
         </div>
       </section>
 
+      <section className="tt-section tt-test-access">
+        <div>
+          <SectionLabel>Plataforma de tests</SectionLabel>
+          <h2>Practica el examen en una página dedicada</h2>
+          <p>
+            Accede a la plataforma de test de competencia profesional de mercancías para entrenar por módulos,
+            comprobar respuestas al momento y medir tu progreso antes del examen.
+          </p>
+          <div className="tt-test-access__actions">
+            <Link className="tt-btn tt-btn-primary" href="/test-competencia-profesional-mercancias/">
+              <Icon name="doc" /> Hacer tests ahora
+            </Link>
+            <Link className="tt-btn tt-btn-secondary" href="/login/">
+              Iniciar sesión
+            </Link>
+          </div>
+        </div>
+        <aside aria-hidden="true">
+          <span>Módulo 1</span>
+          <strong>Pregunta 12 / 200</strong>
+          <div>
+            <i />
+            <i />
+            <i />
+          </div>
+          <p>Corrección inmediata y práctica separada de la home.</p>
+        </aside>
+      </section>
+
       <section className="tt-section tt-ai">
         <div>
           <SectionLabel>Tu profesor IA de transporte</SectionLabel>
@@ -625,7 +653,7 @@ export default function Home() {
           <div>
             <SectionLabel>Recursos útiles</SectionLabel>
             <h2>Antes de decidir, resuelve tus dudas clave</h2>
-            <p>Guías, checklist y práctica para elegir mejor entre alquiler, cesión, curso o plataforma test.</p>
+            <p>Guías y checklist para elegir mejor entre alquiler, cesión, curso o asesoramiento experto.</p>
           </div>
         </div>
         <div className="tt-resource-grid">

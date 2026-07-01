@@ -240,7 +240,16 @@ export default async function MigratedRoutePage({ params }: PageProps) {
           <h1>{pageTitle}</h1>
           <p>{pageDescription}</p>
           <div className="tt-actions">
-            {isAccount ? (
+            {isTestPage ? (
+              <>
+                <Link className="tt-btn tt-btn-primary" href="#test-app-heading">
+                  Empezar test
+                </Link>
+                <Link className="tt-btn tt-btn-secondary" href="/login/">
+                  Iniciar sesión
+                </Link>
+              </>
+            ) : isAccount ? (
               <Link className="tt-btn tt-btn-primary" href="/producto/curso-titulo-profesional-transporte/">
                 Ver curso
               </Link>
@@ -249,9 +258,11 @@ export default async function MigratedRoutePage({ params }: PageProps) {
                 Consultar por WhatsApp
               </a>
             )}
-            <Link className="tt-btn tt-btn-secondary" href="/contacto/">
-              Contacto
-            </Link>
+            {!isTestPage ? (
+              <Link className="tt-btn tt-btn-secondary" href="/contacto/">
+                Contacto
+              </Link>
+            ) : null}
           </div>
         </div>
 
