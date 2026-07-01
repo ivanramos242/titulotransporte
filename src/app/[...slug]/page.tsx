@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { TestPractice } from "@/components/test-practice";
@@ -6,6 +7,65 @@ import { allRoutes, blogPosts, metadataFor, routeByPath, site } from "@/lib/site
 
 type PageProps = {
   params: Promise<{ slug: string[] }>;
+};
+
+type RouteRecord = (typeof allRoutes)[number];
+
+const importantLinks = [
+  { href: "/titulos/", label: "Alquiler de título" },
+  { href: "/cede-tu-titulo-de-transporte/", label: "Ceder título" },
+  { href: "/producto/curso-titulo-profesional-transporte/", label: "Curso transportista" },
+  { href: "/test-competencia-profesional-mercancias/", label: "Plataforma test" },
+  { href: "/profesor-ia/", label: "Profesor IA" },
+  { href: "/blog/", label: "Recursos" },
+];
+
+const routeVisuals: Record<string, { label: string; image: string; accent: string }> = {
+  "/titulos/": {
+    label: "Alquiler de título",
+    image: "/home-assets/hero.webp",
+    accent: "Empieza a operar con acompañamiento experto.",
+  },
+  "/cede-tu-titulo-de-transporte/": {
+    label: "Cesión de título",
+    image: "/home-assets/audience.webp",
+    accent: "Convierte tu capacitación en una oportunidad segura.",
+  },
+  "/producto/curso-titulo-profesional-transporte/": {
+    label: "Curso online",
+    image: "/home-assets/course.webp",
+    accent: "Preparación práctica para el examen oficial.",
+  },
+  "/profesor-ia/": {
+    label: "Profesor IA",
+    image: "/home-assets/ai.webp",
+    accent: "Resuelve dudas de normativa cuando lo necesites.",
+  },
+  "/test-competencia-profesional-mercancias/": {
+    label: "Plataforma test",
+    image: "/home-assets/course.webp",
+    accent: "Practica con preguntas y seguimiento de progreso.",
+  },
+  "/servicios-asesoria-legal-para-transporte/": {
+    label: "Asesoría de transporte",
+    image: "/home-assets/trust.webp",
+    accent: "Gestión clara, documentación y cumplimiento normativo.",
+  },
+  "/sobre-nosotros/": {
+    label: "Equipo experto",
+    image: "/home-assets/benefits.webp",
+    accent: "Especialistas en empresas y autónomos del transporte.",
+  },
+  "/contacto/": {
+    label: "Contacto",
+    image: "/home-assets/final.webp",
+    accent: "Cuéntanos tu caso y te orientamos rápido.",
+  },
+  "/blog/": {
+    label: "Recursos",
+    image: "/home-assets/services.webp",
+    accent: "Guías sobre normativa, gestor y competencia profesional.",
+  },
 };
 
 function pathFromSlug(slug: string[]) {
@@ -22,7 +82,27 @@ function normalizeLegacyHtml(html: string) {
   return html.replace(/<h1(\s[^>]*)?>/gi, "<h2$1>").replace(/<\/h1>/gi, "</h2>");
 }
 
-function schemaForRoute(route: (typeof allRoutes)[number], title: string, description: string) {
+function routeVisualFor(route: RouteRecord, isPost: boolean, isProduct: boolean) {
+  if (routeVisuals[route.path]) {
+    return routeVisuals[route.path];
+  }
+
+  if (isPost) {
+    return routeVisuals["/blog/"];
+  }
+
+  if (isProduct) {
+    return routeVisuals["/producto/curso-titulo-profesional-transporte/"];
+  }
+
+  return {
+    label: "Titulotransporte",
+    image: "/home-assets/trust.webp",
+    accent: "Soluciones para operar con claridad en transporte.",
+  };
+}
+
+function schemaForRoute(route: RouteRecord, title: string, description: string) {
   const url = new URL(route.path, site.url).toString();
   const breadcrumb = {
     "@context": "https://schema.org",
@@ -90,9 +170,7 @@ export async function generateMetadata({ params }: PageProps) {
 
   const migratedContent = findMigratedContent(path);
   if (migratedContent) {
-    const title = migratedContent.hasRankTitle
-      ? migratedContent.seoTitle
-      : route.title;
+    const title = migratedContent.hasRankTitle ? migratedContent.seoTitle : route.title;
     const description = migratedContent.hasRankDescription
       ? migratedContent.seoDescription
       : route.description;
@@ -119,81 +197,99 @@ export default async function MigratedRoutePage({ params }: PageProps) {
   const isProduct = route.type === "product";
   const isAccount = route.type === "account";
   const isPost = route.type === "post";
+  const isTestPage = route.path === "/test-competencia-profesional-mercancias/";
   const migratedContent = findMigratedContent(route.path);
   const migratedHtml = normalizeLegacyHtml(migratedContent?.html || "");
   const hasHtml = Boolean(migratedHtml);
-  const isTestPage = route.path === "/test-competencia-profesional-mercancias/";
   const pageTitle = migratedContent?.title || route.h1;
   const pageDescription = migratedContent?.hasRankDescription
     ? migratedContent.seoDescription
     : route.description;
   const schemas = schemaForRoute(route, pageTitle, pageDescription);
+  const visual = routeVisualFor(route, isPost, isProduct);
+  const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
+    `Quiero información sobre ${pageTitle}`,
+  )}`;
 
   return (
-    <main>
-      <section className="subhero">
-        <p className="eyebrow">
-          {isPost ? "Guía" : isProduct ? "Producto" : "titulotransporte.com"}
-        </p>
-        <h1>{pageTitle}</h1>
-        <p>{pageDescription}</p>
-        <div className="hero-actions compact">
-          {isAccount ? (
-            <Link className="button primary" href="/producto/curso-titulo-profesional-transporte/">
-              Ver curso
+    <main className={`inner-page inner-page--${route.type}${isPost ? " inner-page--post" : ""}`}>
+      <section className="inner-hero">
+        <div className="inner-hero-copy">
+          <p className="tt-label">{isPost ? "Guía" : visual.label}</p>
+          <h1>{pageTitle}</h1>
+          <p>{pageDescription}</p>
+          <div className="tt-actions">
+            {isAccount ? (
+              <Link className="tt-btn tt-btn-primary" href="/producto/curso-titulo-profesional-transporte/">
+                Ver curso
+              </Link>
+            ) : (
+              <a className="tt-btn tt-btn-primary" href={whatsappUrl}>
+                Consultar por WhatsApp
+              </a>
+            )}
+            <Link className="tt-btn tt-btn-secondary" href="/contacto/">
+              Contacto
             </Link>
-          ) : (
-            <a
-              className="button primary"
-              href={`https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-                `Quiero información sobre ${pageTitle}`,
-              )}`}
-            >
-              Consultar por WhatsApp
-            </a>
-          )}
-          <Link className="button secondary" href="/contacto/">
-            Contacto
-          </Link>
+          </div>
         </div>
+
+        <aside className="inner-hero-visual">
+          <Image src={visual.image} alt="" fill priority sizes="(max-width: 900px) 100vw, 44vw" />
+          <div className="inner-visual-card">
+            <span>{visual.label}</span>
+            <strong>{visual.accent}</strong>
+          </div>
+        </aside>
       </section>
 
-      {isTestPage ? <TestPractice /> : null}
+      {isTestPage ? (
+        <section className="inner-wide">
+          <TestPractice />
+        </section>
+      ) : null}
 
-      {hasHtml ? (
-        <article className="wp-content-shell">
-          <div
-            className="wp-content"
-            dangerouslySetInnerHTML={{ __html: migratedHtml }}
-          />
-        </article>
-      ) : (
-        <section className="section two-col">
-          <div>
-            <p className="eyebrow">Acceso privado</p>
+      <div className="inner-layout">
+        {hasHtml ? (
+          <article className="wp-content-shell">
+            <div className="wp-content" dangerouslySetInnerHTML={{ __html: migratedHtml }} />
+          </article>
+        ) : (
+          <section className="inner-private">
+            <p className="tt-label">Acceso privado</p>
             <h2>Contenido disponible para usuarios registrados</h2>
-          </div>
-          <div className="copy-stack">
             <p>
-              Esta zona forma parte del área de alumnos y clientes. Accede a tu
-              cuenta o consulta el curso para ver las opciones disponibles.
+              Esta zona forma parte del área de alumnos y clientes. Accede a tu cuenta o consulta el curso para ver las opciones disponibles.
             </p>
             {isProduct ? (
               <p>
-                Curso online para preparar la competencia profesional del
-                transporte con test, materiales digitales y apoyo de estudio.
+                Curso online para preparar la competencia profesional del transporte con test, materiales digitales y apoyo de estudio.
               </p>
             ) : null}
-          </div>
-        </section>
-      )}
+          </section>
+        )}
 
-      <section className="section dark-band">
+        <aside className="inner-sidebar" aria-label="Enlaces importantes">
+          <div className="inner-sidebar-card">
+            <span>¿Necesitas claridad?</span>
+            <h2>Te orientamos sobre la mejor opción</h2>
+            <p>Revisamos tu caso y te indicamos si te conviene alquilar, ceder, preparar el examen o usar la plataforma test.</p>
+            <a className="tt-btn tt-btn-primary" href={whatsappUrl}>Hablar por WhatsApp</a>
+          </div>
+          <nav className="inner-link-list">
+            {importantLinks.map((link) => (
+              <Link key={link.href} href={link.href}>{link.label}</Link>
+            ))}
+          </nav>
+        </aside>
+      </div>
+
+      <section className="inner-final">
         <div>
-          <p className="eyebrow">Siguiente paso</p>
+          <p className="tt-label">Siguiente paso</p>
           <h2>Resuelve tus dudas sobre transporte</h2>
         </div>
-        <ul className="check-list">
+        <ul>
           <li>Consulta requisitos antes de iniciar el trámite.</li>
           <li>Revisa si te interesa alquilar, ceder o preparar el examen.</li>
           <li>Accede a test y materiales de competencia profesional.</li>
@@ -202,9 +298,9 @@ export default async function MigratedRoutePage({ params }: PageProps) {
       </section>
 
       {route.path === "/blog/" ? (
-        <section className="services">
-          <div className="section-heading">
-            <p className="eyebrow">Archivo editorial</p>
+        <section className="inner-blog-list">
+          <div>
+            <p className="tt-label">Archivo editorial</p>
             <h2>Guías sobre transporte y competencia profesional</h2>
           </div>
           <div className="post-list">
