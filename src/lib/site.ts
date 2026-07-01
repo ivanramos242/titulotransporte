@@ -4,9 +4,9 @@ import wpContent from "@/data/wp-content.json";
 export const site = {
   name: "titulotransporte.com",
   url: "https://titulotransporte.com",
-  phone: "+34 640 15 52 23",
-  whatsapp: "34640155223",
-  email: "hola@titulotransporte.com",
+  phone: "632 18 28 10",
+  whatsapp: "34632182810",
+  email: "info@titulotransporte.com",
 };
 
 export type RouteRecord = {

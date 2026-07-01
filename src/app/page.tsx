@@ -1,202 +1,639 @@
-import Link from "next/link";
+import type { Metadata } from "next";
 import Image from "next/image";
-import { metadataFor, routeByPath, site } from "@/lib/site";
+import Link from "next/link";
+import { site } from "@/lib/site";
 
-const homeRoute = routeByPath("/")!;
+const whatsappBase = `https://wa.me/${site.whatsapp}`;
+const whatsappHero = `${whatsappBase}?text=${encodeURIComponent(
+  "Hola, quiero información para alquilar un título de transportista.",
+)}`;
+const whatsappAdvice = `${whatsappBase}?text=${encodeURIComponent(
+  "Hola, quiero que me asesoréis sobre qué opción me conviene.",
+)}`;
 
-export const metadata = metadataFor(homeRoute);
+export const metadata: Metadata = {
+  title: "Alquilar título de transportista | Titulotransporte",
+  description:
+    "Alquila un título de transportista, cede tu título o prepárate para conseguirlo con nuestro curso online. Asesoramiento experto y atención personalizada.",
+  alternates: { canonical: "https://titulotransporte.com/" },
+  openGraph: {
+    type: "website",
+    locale: "es_ES",
+    siteName: "Titulotransporte",
+    title: "Alquilar título de transportista | Titulotransporte",
+    description:
+      "Alquila un título de transportista, cede tu título o prepárate para conseguirlo con nuestro curso online. Asesoramiento experto y atención personalizada.",
+    url: "https://titulotransporte.com/",
+  },
+};
 
-const proofItems = [
-  ["4.484", "preguntas reales de examen"],
-  ["30", "guías sobre transporte"],
-  ["99 EUR", "curso online actual"],
-  ["España", "normativa y trámites"],
-];
+const images = {
+  hero: "/home-assets/hero.webp",
+  audience: "/home-assets/audience.webp",
+  services: "/home-assets/services.webp",
+  process: "/home-assets/process.webp",
+  benefits: "/home-assets/benefits.webp",
+  trust: "/home-assets/trust.webp",
+  course: "/home-assets/course.webp",
+  ai: "/home-assets/ai.webp",
+  faq: "/home-assets/faq.webp",
+  final: "/home-assets/final.webp",
+};
 
-const services = [
+const serviceCards = [
   {
-    title: "Alquilar título de transporte",
-    text: "Estudiamos tu caso y te orientamos sobre la vía adecuada para operar con gestor o título de transporte.",
+    icon: "doc",
+    title: "Alquiler de título",
+    description:
+      "Alquila un título de transportista para cumplir la normativa y operar desde el primer día.",
+    benefits: ["Cumplimiento legal", "Sin inversión ni esperas", "Gestión rápida y segura"],
     href: "/titulos/",
+    cta: "Saber más",
   },
   {
-    title: "Ceder tu título",
-    text: "Acompañamiento para titulares que quieren valorar una cesión de forma ordenada y con criterios claros.",
+    icon: "swap",
+    title: "Cesión de título",
+    description:
+      "Te ayudamos a ceder tu título de transportista de forma legal, segura y sin complicaciones.",
+    benefits: ["Proceso transparente", "Seguridad jurídica", "Acompañamiento personalizado"],
     href: "/cede-tu-titulo-de-transporte/",
+    cta: "Saber más",
   },
   {
-    title: "Curso y test online",
-    text: "Preparación para la competencia profesional de mercancías con preguntas reales, simulación y apoyo de estudio.",
+    icon: "cap",
+    title: "Curso para obtener el título",
+    description:
+      "Formación completa y actualizada para que obtengas tu título de transportista con éxito.",
+    benefits: ["Modalidad online", "Temario actualizado", "Tutoría y examen oficial"],
     href: "/producto/curso-titulo-profesional-transporte/",
+    cta: "Ver curso",
+  },
+  {
+    icon: "support",
+    title: "Profesor IA / soporte 24/7",
+    description:
+      "Resuelve tus dudas al instante y recibe soporte humano siempre que lo necesites.",
+    benefits: ["Respuestas inmediatas", "IA entrenada en normativa", "Soporte experto"],
+    href: "/profesor-ia/",
+    cta: "Probar profesor IA",
   },
 ];
 
-const faq = [
+const audienceCards = [
+  ["user", "Autónomos que empiezan", "Inicia tu actividad cuanto antes y cumpliendo la normativa desde el primer día."],
+  ["truck", "Empresas que quieren ampliar flota", "Añade vehículos y gana capacidad operativa sin frenar oportunidades."],
+  ["deal", "Profesionales que quieren ceder su título", "Obtén rentabilidad cediendo tu título con garantías legales."],
+  ["cap", "Personas que preparan el examen", "Acelera tu camino profesional mientras te enfocas en aprobar."],
+];
+
+const processSteps = [
+  ["1", "Cuéntanos tu caso", "Hablamos de tus necesidades y te asesoramos sin compromiso.", "Respuesta en menos de 24 h"],
+  ["2", "Te proponemos la mejor opción", "Diseñamos la solución que mejor se adapta a tu negocio y te enviamos la propuesta.", "A medida y sin sorpresas"],
+  ["3", "Activas tu solución y empiezas", "Nos encargamos del proceso para que puedas empezar a trabajar cuanto antes.", "Rápido, legal y seguro"],
+];
+
+const benefits = [
+  ["refresh", "Sin permanencia", "Sin ataduras. Alquila tu título el tiempo que lo necesites, con total flexibilidad."],
+  ["clock", "Activación rápida", "En 24/48 horas tu caso estará revisado para avanzar sin interrupciones."],
+  ["advisor", "Asesoramiento experto", "Te acompañamos en cada paso con especialistas en transporte."],
+  ["shield", "Cumplimiento normativo", "Proceso alineado con la normativa vigente para tu tranquilidad."],
+  ["support", "Atención personalizada", "Un asesor dedicado resuelve tus dudas antes, durante y después."],
+  ["map", "Cobertura en toda España", "Prestamos servicio online estés donde estés."],
+];
+
+const trustFeatures = [
+  ["shield", "Experiencia en gestión de transporte", "Más de 15 años ayudando a empresas y autónomos del sector."],
+  ["support", "Soporte en cada paso", "Te asesoramos y resolvemos dudas antes, durante y después."],
+  ["doc", "Documentación clara", "Te indicamos todo lo necesario para operar con total tranquilidad."],
+  ["team", "Acompañamiento real", "Un equipo cercano entiende tu negocio y te da soluciones."],
+];
+
+const courseBenefits = [
+  ["box", "100% práctico", "Contenidos claros, ejemplos reales y test actualizados."],
+  ["spark", "Actualizado a normativa vigente", "Incluye las novedades legales de 2026."],
+  ["clock", "A tu ritmo", "Estudia cuando quieras, sin horarios ni presiones."],
+  ["doc", "Desde cualquier dispositivo", "Accede desde tu móvil, tablet u ordenador."],
+];
+
+const aiBenefits = [
+  ["pen", "Resuelve dudas al instante", "Obtén respuestas claras y precisas sobre normativa, requisitos y procedimientos."],
+  ["brain", "Te guía durante el estudio", "Explicaciones paso a paso, ejemplos prácticos y recursos adaptados a ti."],
+  ["clock", "Disponible 24/7", "Accede a tu profesor IA desde cualquier dispositivo cuando lo necesites."],
+];
+
+const resources = [
+  ["PDF", "Guía para alquilar un título de transportista", "Qué revisar, qué preguntar y qué errores evitar antes de decidir.", "/blog/"],
+  ["Checklist", "Checklist para empezar en transporte", "Requisitos, pasos y documentación básica para avanzar con más claridad.", "/titulos/"],
+  ["Test online", "Test de competencia profesional", "Practica con preguntas reales y mide tu progreso antes del examen.", "/test-competencia-profesional-mercancias/"],
+];
+
+const faqs = [
   [
-    "¿Qué es un título de transporte?",
-    "Es la capacitación profesional necesaria para que una empresa pueda cumplir los requisitos de acceso a la actividad de transporte de mercancías por carretera.",
+    "¿Qué es el alquiler de un título de transportista?",
+    "Es una solución mediante la cual una empresa puede contar con el apoyo necesario para cumplir determinados requisitos del sector transporte. Cada caso debe revisarse individualmente para asegurar que el encaje sea correcto.",
   ],
   [
-    "¿Puedo alquilar un título de transporte?",
-    "Depende de la situación de la empresa, del gestor de transporte y de cómo se cumplan los requisitos legales. Por eso conviene revisar el caso antes de tomar una decisión.",
+    "¿Qué diferencia hay entre alquilar y ceder un título de transportista?",
+    "Quien necesita alquilar busca poder operar o avanzar en su actividad. Quien quiere ceder ya dispone del título y quiere valorar si puede rentabilizarlo en condiciones adecuadas.",
   ],
   [
-    "¿Cómo preparo el examen de competencia profesional?",
-    "Puedes practicar con el banco de preguntas, hacer simulacros y reforzar los temas que fallas antes de presentarte al examen.",
+    "¿Es legal alquilar o ceder un título de transportista?",
+    "Depende de cómo se estructure la relación, las funciones reales del gestor, la vinculación y el cumplimiento de los requisitos aplicables. Por eso es importante revisar cada caso antes de tomar una decisión.",
+  ],
+  [
+    "¿Qué requisitos necesito para alquilar un título?",
+    "Necesitamos revisar tu actividad, documentación, vehículo o flota, urgencia y situación administrativa para indicarte la opción adecuada.",
+  ],
+  [
+    "¿Cuánto tiempo tarda el proceso completo?",
+    "La orientación inicial puede darse rápido. La activación depende de la documentación, el encaje del caso y los requisitos aplicables.",
+  ],
+  [
+    "¿Cuánto cuesta alquilar un título de transportista?",
+    "El precio varía según el caso, la duración, el tipo de actividad y el nivel de acompañamiento. Lo mejor es explicar tu situación y recibir una propuesta concreta.",
+  ],
+  [
+    "¿Puedo alquilar un título sin permanencia mínima?",
+    "Trabajamos con soluciones flexibles. Te explicaremos las condiciones antes de que tomes una decisión.",
   ],
 ];
 
-export default function Home() {
-  const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
-    "Quiero información sobre el título de transporte",
-  )}`;
+function Icon({ name }: { name: string }) {
+  const paths: Record<string, string[]> = {
+    advisor: ["M12 6a4 4 0 1 0 0 8a4 4 0 0 0 0-8Z", "M6 21a6 6 0 0 1 12 0"],
+    brain: ["M8 8a4 4 0 0 1 8 0", "M8 8a4 4 0 0 0 0 8", "M16 8a4 4 0 0 1 0 8", "M9 16v3", "M15 16v3"],
+    box: ["M4 7l8-4 8 4-8 4-8-4Z", "M4 7v10l8 4 8-4V7", "M12 11v10"],
+    cap: ["M3 9l9-5 9 5-9 5-9-5Z", "M7 11v5c3 2 7 2 10 0v-5"],
+    clock: ["M12 21a9 9 0 1 0 0-18a9 9 0 0 0 0 18Z", "M12 7v5l3 2"],
+    deal: ["M8 12l3 3 5-6", "M4 12a8 8 0 0 1 13-6", "M20 12a8 8 0 0 1-13 6"],
+    doc: ["M7 3h7l4 4v14H7V3Z", "M14 3v5h5", "M9 13h6", "M9 17h6"],
+    map: ["M9 18l-6 3V6l6-3 6 3 6-3v15l-6 3-6-3Z", "M9 3v15", "M15 6v15"],
+    pen: ["M4 20l4-1 10-10-3-3L5 16l-1 4Z", "M14 6l3 3"],
+    refresh: ["M20 12a8 8 0 0 1-14 5", "M4 12a8 8 0 0 1 14-5", "M18 3v4h-4", "M6 21v-4h4"],
+    shield: ["M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3Z", "M9 12l2 2 4-5"],
+    spark: ["M12 3l1.8 5.2L19 10l-5.2 1.8L12 17l-1.8-5.2L5 10l5.2-1.8L12 3Z"],
+    support: ["M5 13v-2a7 7 0 0 1 14 0v2", "M5 13h3v5H5v-5Z", "M16 13h3v5h-3v-5Z", "M16 18c0 2-2 3-4 3"],
+    swap: ["M7 7h11l-3-3", "M17 17H6l3 3", "M18 7l-3 3", "M6 17l3-3"],
+    team: ["M8 11a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z", "M16 11a3 3 0 1 0 0-6a3 3 0 0 0 0 6Z", "M3 21a5 5 0 0 1 10 0", "M11 21a5 5 0 0 1 10 0"],
+    truck: ["M3 7h11v9H3V7Z", "M14 10h4l3 3v3h-7v-6Z", "M7 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4Z", "M17 20a2 2 0 1 0 0-4a2 2 0 0 0 0 4Z"],
+    user: ["M12 11a4 4 0 1 0 0-8a4 4 0 0 0 0 8Z", "M5 21a7 7 0 0 1 14 0"],
+  };
 
   return (
-    <main>
-      <section className="home-hero">
-        <div className="hero-stage" aria-hidden="true">
-          <Image
-            className="hero-orbit"
-            src="https://titulotransporte.com/wp-content/uploads/2025/09/Vector-282.svg"
-            alt=""
-            width={609}
-            height={633}
-            priority
-            unoptimized
-          />
-          <Image
-            className="hero-ia"
-            src="https://titulotransporte.com/wp-content/uploads/2025/09/ChatGPT-Image-18-sept-2025-19_48_04-1-e1758219879225.png"
-            alt=""
-            width={740}
-            height={802}
-            priority
-            sizes="(max-width: 960px) 58vw, 360px"
-          />
-          <div className="hero-course">
-            <Image
-              src="https://titulotransporte.com/wp-content/uploads/2025/08/Curso-titulo-transporte.png"
-              alt=""
-              width={1080}
-              height={1080}
-              priority
-              sizes="190px"
-            />
-            <span>Curso online</span>
+    <span className="tt-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+        {(paths[name] || paths.shield).map((d) => <path key={d} d={d} />)}
+      </svg>
+    </span>
+  );
+}
+
+function SectionLabel({ children }: { children: React.ReactNode }) {
+  return <p className="tt-label">{children}</p>;
+}
+
+function UiDashboard() {
+  return (
+    <div className="tt-dashboard" aria-hidden="true">
+      <div className="tt-dashboard-top">
+        <strong>TITULOTRANSPORTE</strong>
+        <span>Panel</span>
+      </div>
+      <div className="tt-dashboard-body">
+        <aside>
+          <span />
+          <span />
+          <span />
+          <span />
+        </aside>
+        <div>
+          <div className="tt-map" />
+          <div className="tt-bars">
+            <span />
+            <span />
+            <span />
           </div>
         </div>
+      </div>
+    </div>
+  );
+}
 
-        <div className="hero-copy">
-          <p className="eyebrow">Título de transporte · España</p>
-          <h1>{homeRoute.h1}</h1>
-          <p className="hero-lead">
-            Te ayudamos a estudiar la vía adecuada para alquilar un título de
-            transporte, cederlo o preparar la competencia profesional con curso,
-            test online y apoyo de profesor IA.
-          </p>
-          <div className="hero-actions">
-            <a className="button primary" href={whatsappUrl}>
-              Hablar por WhatsApp
-            </a>
-            <Link className="button secondary" href="/test-competencia-profesional-mercancias/">
-              Practicar test
-            </Link>
-          </div>
-        </div>
+function CourseMockup() {
+  return (
+    <figure className="tt-course-mock" aria-hidden="true">
+      <Image src={images.course} alt="" fill sizes="(max-width: 900px) 100vw, 52vw" />
+    </figure>
+  );
+}
 
-        <div className="hero-panel" aria-label="Opciones de título de transporte">
-          <span className="panel-kicker">Alquiler · cesión · formación</span>
-          <strong>Una ruta clara para operar o prepararte</strong>
+function AiMockup() {
+  return (
+    <figure className="tt-ai-mock" aria-hidden="true">
+      <Image src={images.ai} alt="" fill sizes="(max-width: 900px) 100vw, 52vw" />
+    </figure>
+  );
+}
+
+export default function Home() {
+  const graph = {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": `${site.url}/#organization`,
+        name: "Titulotransporte",
+        url: site.url,
+        email: site.email,
+        telephone: site.phone,
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": `${site.url}/#localbusiness`,
+        name: "Titulotransporte",
+        url: site.url,
+        telephone: site.phone,
+        email: site.email,
+        areaServed: "España",
+        priceRange: "€€",
+      },
+      {
+        "@type": "Course",
+        name: "Curso Título Transporte 2026",
+        description: "Curso online para preparar el título de transportista por carretera.",
+        provider: { "@id": `${site.url}/#organization` },
+      },
+      {
+        "@type": "Product",
+        name: "Curso Título Transporte 2026",
+        description: "Formación online para preparar el examen oficial de competencia profesional.",
+        offers: {
+          "@type": "Offer",
+          price: "99.00",
+          priceCurrency: "EUR",
+          availability: "https://schema.org/InStock",
+          url: `${site.url}/producto/curso-titulo-profesional-transporte/`,
+        },
+      },
+      {
+        "@type": "FAQPage",
+        mainEntity: faqs.map(([name, text]) => ({
+          "@type": "Question",
+          name,
+          acceptedAnswer: { "@type": "Answer", text },
+        })),
+      },
+    ],
+  };
+
+  return (
+    <main className="tt-home">
+      <section className="tt-hero">
+        <div className="tt-hero-copy">
+          <SectionLabel>Soluciones rápidas, legales y sin complicaciones</SectionLabel>
+          <h1>Alquila tu título de transportista y empieza a trabajar antes</h1>
           <p>
-            Combinamos asesoría, formación y práctica para que sepas qué opción
-            encaja mejor con tu empresa o con tu capacitación profesional.
+            Te ayudamos a cumplir con la normativa y poner en marcha tu negocio de transporte por carretera sin demoras.
+            Soluciones flexibles, 100% legales y con el respaldo de un equipo de expertos.
           </p>
-          <div className="route-strip">
-            <Link href="/titulos/">Alquilar título</Link>
-            <Link href="/cede-tu-titulo-de-transporte/">Ceder título</Link>
-            <Link href="/test-competencia-profesional-mercancias/">Test online</Link>
+          <div className="tt-actions">
+            <a className="tt-btn tt-btn-primary" href={whatsappHero} data-event="click_whatsapp_hero">
+              <Icon name="shield" /> Quiero alquilar un título
+            </a>
+            <Link className="tt-btn tt-btn-secondary" href="/producto/curso-titulo-profesional-transporte/" data-event="click_course_hero">
+              <Icon name="cap" /> Ver curso
+            </Link>
           </div>
+          <div className="tt-badges">
+            {["Sin permanencia", "Asesoramiento experto", "Cumplimiento normativo"].map((badge) => (
+              <span key={badge}><Icon name="shield" /> {badge}</span>
+            ))}
+          </div>
+        </div>
+        <div className="tt-hero-media">
+          <Image
+            src={images.hero}
+            alt="Asesor de transporte revisando documentación con un autónomo del sector"
+            fill
+            priority
+            sizes="(max-width: 900px) 100vw, 54vw"
+          />
+          <UiDashboard />
         </div>
       </section>
 
-      <section className="proof-strip" aria-label="Datos principales">
-        {proofItems.map(([value, label]) => (
-          <div key={label}>
-            <strong>{value}</strong>
-            <span>{label}</span>
-          </div>
-        ))}
+      <section className="tt-proof" aria-label="Datos principales">
+        <div><Icon name="team" /><strong>+1.200</strong><span>Clientes satisfechos en toda España</span></div>
+        <div><Icon name="clock" /><strong>24/48 h</strong><span>Tiempo medio de activación</span></div>
+        <div><Icon name="shield" /><strong>100% legal</strong><span>Cumplimiento de la normativa vigente</span></div>
+        <div><Icon name="support" /><strong>Soporte experto</strong><span>Acompañamiento continuo</span></div>
       </section>
 
-      <section className="section two-col home-intent">
+      <section className="tt-section tt-audience">
+        <div className="tt-card-shell tt-split">
+          <div>
+            <SectionLabel>Para autónomos, pequeñas flotas y empresas</SectionLabel>
+            <h2>La forma más rápida de empezar si aún no tienes título</h2>
+            <p>
+              Sabemos que necesitas operar ya, captar clientes y hacer crecer tu negocio. Por eso te lo ponemos fácil:
+              nosotros nos encargamos de todo para que no tengas que perder tiempo con requisitos ni burocracia.
+            </p>
+            <div className="tt-mini-grid">
+              {audienceCards.map(([icon, title, description]) => (
+                <article key={title} className="tt-mini-card">
+                  <Icon name={icon} />
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </article>
+              ))}
+            </div>
+            <a className="tt-btn tt-btn-primary" href={whatsappAdvice}>
+              <Icon name="shield" /> Quiero que me asesoren
+            </a>
+            <p className="tt-checkline"><Icon name="shield" /> Asesoramiento gratuito y sin compromiso</p>
+          </div>
+          <figure className="tt-image-card">
+            <Image src={images.audience} alt="Profesional del transporte revisando documentación en una oficina" fill sizes="(max-width: 900px) 100vw, 48vw" />
+          </figure>
+        </div>
+      </section>
+
+      <section className="tt-section tt-services">
+        <div className="tt-section-head">
+          <div>
+            <SectionLabel>Servicios principales</SectionLabel>
+            <h2>Todo lo que necesitas para avanzar en transporte</h2>
+            <p>Soluciones integrales para que cumplas la normativa, ahorres tiempo y hagas crecer tu negocio de transporte con total tranquilidad.</p>
+          </div>
+          <figure className="tt-services-visual">
+            <Image src={images.services} alt="Panel de servicios de gestión de transporte" fill sizes="520px" />
+            <UiDashboard />
+          </figure>
+        </div>
+        <div className="tt-service-grid">
+          {serviceCards.map((card) => (
+            <Link key={card.title} href={card.href} className="tt-service-card">
+              <Icon name={card.icon} />
+              <h3>{card.title}</h3>
+              <p>{card.description}</p>
+              <ul>
+                {card.benefits.map((benefit) => <li key={benefit}>{benefit}</li>)}
+              </ul>
+              <span>{card.cta} →</span>
+            </Link>
+          ))}
+        </div>
+        <div className="tt-strip">
+          <span><Icon name="advisor" /> Asesoramiento experto desde el primer día</span>
+          <span><Icon name="shield" /> Soluciones a medida para tu negocio</span>
+          <span><Icon name="team" /> +1.200 clientes satisfechos en toda España</span>
+        </div>
+      </section>
+
+      <section className="tt-section tt-process">
+        <div className="tt-process-copy">
+          <SectionLabel>Cómo funciona</SectionLabel>
+          <h2>Empieza en 3 pasos</h2>
+          <p>Así de fácil es alquilar tu título de transportista con nosotros. Un proceso rápido, claro y 100% legal.</p>
+          <div className="tt-timeline">
+            {processSteps.map(([number, title, description, tag]) => (
+              <article key={number}>
+                <strong>{number}</strong>
+                <div>
+                  <Icon name="doc" />
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                  <span>{tag}</span>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="tt-actions">
+            <a className="tt-btn tt-btn-primary" href={whatsappBase}>
+              <Icon name="support" /> Hablar por WhatsApp
+            </a>
+            <span className="tt-phone-text">O llámanos al {site.phone}</span>
+          </div>
+        </div>
+        <figure className="tt-process-image">
+          <Image src={images.process} alt="Persona contactando por WhatsApp para consultar sobre título de transportista" fill sizes="50vw" />
+          <div className="tt-whatsapp-card">
+            <strong>Titulotransporte</strong>
+            <span>Hola, necesito alquilar un título de transportista.</span>
+            <p>Perfecto. ¿Podríamos hablar por teléfono?</p>
+          </div>
+        </figure>
+      </section>
+
+      <section className="tt-section tt-benefits">
+        <div className="tt-benefit-copy">
+          <SectionLabel>¿Por qué elegir Titulotransporte?</SectionLabel>
+          <h2>Más simple, más legal y más rápido</h2>
+          <p>
+            Un servicio integral para que puedas alquilar tu título de transportista con total tranquilidad y centrarte en hacer crecer tu negocio.
+          </p>
+          <div className="tt-benefit-grid">
+            {benefits.map(([icon, title, description]) => (
+              <article key={title}>
+                <Icon name={icon} />
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+        <figure className="tt-benefit-image">
+          <Image src={images.benefits} alt="Asesor de transporte atendiendo a un cliente en oficina" fill sizes="50vw" />
+        </figure>
+        <div className="tt-reviews">
+          <div>
+            <h3>Lo que dicen nuestros clientes</h3>
+            <strong>Excelente</strong>
+            <span>4.9/5 en Google</span>
+          </div>
+          {["Profesionales y muy cercanos. En 24 horas tenía todo listo para seguir trabajando.", "La flexibilidad y el asesoramiento marcan la diferencia.", "Cumplen lo que prometen y siempre están disponibles."].map((quote, index) => (
+            <blockquote key={quote}>
+              <span>★★★★★</span>
+              <p>“{quote}”</p>
+              <cite>{["Carlos M.", "Laura G.", "Javier P."][index]}</cite>
+            </blockquote>
+          ))}
+        </div>
+      </section>
+
+      <section className="tt-section tt-trust">
+        <figure>
+          <Image src={images.trust} alt="Equipo de transporte revisando documentación con clientes" fill sizes="50vw" />
+        </figure>
         <div>
-          <p className="eyebrow">Intención principal</p>
-          <h2>Para empresas que necesitan operar con título de transporte</h2>
+          <SectionLabel>Confianza, normativa y equipo experto</SectionLabel>
+          <h2>Gestión experta y 100% alineada con la normativa</h2>
+          <p>
+            Aseguramos que tu empresa cumpla con todos los requisitos legales del transporte por carretera. Nos encargamos de la gestión, la documentación y la comunicación con la administración.
+          </p>
+          <div className="tt-trust-grid">
+            {trustFeatures.map(([icon, title, description]) => (
+              <article key={title}>
+                <Icon name={icon} />
+                <h3>{title}</h3>
+                <p>{description}</p>
+              </article>
+            ))}
+          </div>
+          <div className="tt-stat-box">
+            <span><Icon name="team" /> +15 años de experiencia</span>
+            <span><Icon name="spark" /> +1.200 clientes satisfechos</span>
+            <span><Icon name="clock" /> Respuesta en 24/48 h</span>
+          </div>
+          <Link className="tt-btn tt-btn-primary" href="/contacto/">
+            <Icon name="shield" /> Solicitar información
+          </Link>
         </div>
-        <p>
-          Si necesitas iniciar o regularizar una actividad de transporte de
-          mercancías, el primer paso es entender qué opción encaja: contar con
-          un gestor de transporte, preparar el examen, revisar una cesión o
-          resolver los requisitos administrativos.
-        </p>
       </section>
 
-      <section className="services" aria-labelledby="servicios-heading">
-        <div className="section-heading">
-          <p className="eyebrow">Servicios y formación</p>
-          <h2 id="servicios-heading">Tres caminos para resolver tu situación</h2>
+      <section className="tt-section tt-course">
+        <div>
+          <SectionLabel>Curso online para obtener tu título de transportista</SectionLabel>
+          <h2>Prepárate para conseguir tu título</h2>
+          <h3>Curso Título Transporte 2026</h3>
+          <p>Todo lo que necesitas para aprobar el examen oficial y obtener tu título de transportista por carretera.</p>
+          <div className="tt-list">
+            {courseBenefits.map(([icon, title, description]) => (
+              <article key={title}>
+                <Icon name={icon} />
+                <div>
+                  <h4>{title}</h4>
+                  <p>{description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <div className="tt-price">
+            <del>200€</del>
+            <span>-50% DTO.</span>
+            <strong>99€</strong>
+          </div>
+          <p className="tt-stars">★★★★★ <span>4,9/5 (215 reseñas)</span></p>
+          <div className="tt-actions">
+            <Link className="tt-btn tt-btn-primary" href="/producto/curso-titulo-profesional-transporte/">
+              <Icon name="shield" /> Ver curso
+            </Link>
+            <Link className="tt-btn tt-btn-secondary" href="/producto/curso-titulo-profesional-transporte/#temario">
+              <Icon name="doc" /> Ver temario
+            </Link>
+          </div>
+          <p className="tt-checkline"><Icon name="shield" /> Compra 100% segura · Acceso inmediato · Garantía de 14 días</p>
         </div>
-        <div className="service-grid">
-          {services.map((service, index) => (
-            <Link key={service.href} className="service-card" href={service.href}>
-              <span>0{index + 1}</span>
-              <h3>{service.title}</h3>
-              <p>{service.text}</p>
+        <CourseMockup />
+        <div className="tt-course-strip">
+          <span><Icon name="team" /> <strong>+1.200</strong> alumnos ya han aprobado con nuestro método</span>
+          <span><Icon name="clock" /> <strong>95%</strong> tasa de aprobados en primera convocatoria</span>
+          <span><Icon name="shield" /> <strong>Actualizado 2026</strong> contenido vigente</span>
+          <span><Icon name="support" /> <strong>Soporte experto</strong> cuando lo necesites</span>
+        </div>
+      </section>
+
+      <section className="tt-section tt-ai">
+        <div>
+          <SectionLabel>Tu profesor IA de transporte</SectionLabel>
+          <h2>Tu profesor IA disponible 24/7</h2>
+          <p>Resuelve tus dudas sobre la normativa de transporte al instante, estudia más rápido y recibe ayuda personalizada cuando la necesites.</p>
+          <div className="tt-list">
+            {aiBenefits.map(([icon, title, description]) => (
+              <article key={title}>
+                <Icon name={icon} />
+                <div>
+                  <h3>{title}</h3>
+                  <p>{description}</p>
+                </div>
+              </article>
+            ))}
+          </div>
+          <Link className="tt-btn tt-btn-primary" href="/profesor-ia/" data-event="click_profesor_ia">
+            <Icon name="spark" /> Probar profesor IA
+          </Link>
+        </div>
+        <AiMockup />
+        <div className="tt-ai-strip">
+          <article><Icon name="shield" /><h3>Información 100% fiable y actualizada</h3><p>Entrenado con normativa vigente y fuentes del sector transporte.</p></article>
+          <article><Icon name="pen" /><h3>Ideal para opositores y profesionales</h3><p>Te acompaña si preparas el examen o gestionas autorizaciones.</p></article>
+        </div>
+      </section>
+
+      <section className="tt-section tt-resources">
+        <div className="tt-section-head compact">
+          <div>
+            <SectionLabel>Recursos útiles</SectionLabel>
+            <h2>Antes de decidir, resuelve tus dudas clave</h2>
+            <p>Guías, checklist y práctica para elegir mejor entre alquiler, cesión, curso o plataforma test.</p>
+          </div>
+        </div>
+        <div className="tt-resource-grid">
+          {resources.map(([format, title, description, href]) => (
+            <Link key={title} href={href} className="tt-resource-card">
+              <span>{format}</span>
+              <h3>{title}</h3>
+              <p>{description}</p>
+              <strong>Ver recurso →</strong>
             </Link>
           ))}
         </div>
       </section>
 
-      <section className="section dark-band decision-band">
+      <section className="tt-section tt-faq" id="faq">
         <div>
-          <p className="eyebrow">Sin atajos confusos</p>
-          <h2>Decisiones claras antes de mover dinero o presentar trámites</h2>
+          <SectionLabel>Preguntas frecuentes</SectionLabel>
+          <h2>Resolvemos tus dudas más comunes</h2>
+          <p>Aquí encontrarás respuestas claras a las preguntas más habituales sobre el alquiler y cesión de títulos de transportista.</p>
+          <div className="tt-faq-list">
+            {faqs.map(([question, answer], index) => (
+              <details key={question} open={index === 0}>
+                <summary>{question}</summary>
+                <p>{answer}</p>
+              </details>
+            ))}
+          </div>
         </div>
-        <ul className="check-list">
-          <li>Orientación inicial para entender tu caso.</li>
-          <li>Opciones separadas para alquiler, cesión, curso y test.</li>
-          <li>Contacto directo por WhatsApp o formulario.</li>
-          <li>Contenido claro sobre requisitos, gestor y normativa.</li>
-        </ul>
+        <aside className="tt-support-card">
+          <Icon name="support" />
+          <h3>¿Prefieres hablarlo con nosotros?</h3>
+          <p>Nuestro equipo te asesora sin compromiso y te ayuda a encontrar la mejor solución para tu negocio.</p>
+          <Image src={images.faq} alt="Asesor de transporte atendiendo dudas frecuentes" width={560} height={370} sizes="360px" />
+          <ul>
+            <li>Atención personalizada</li>
+            <li>Respuesta rápida</li>
+            <li>Asesoramiento experto</li>
+          </ul>
+          <a className="tt-btn tt-btn-whatsapp" href={`${whatsappBase}?text=${encodeURIComponent("Hola, tengo dudas sobre el título de transportista.")}`}>
+            Contactar por WhatsApp
+          </a>
+        </aside>
       </section>
 
-      <section className="faq" aria-labelledby="faq-heading">
-        <p className="eyebrow">Preguntas frecuentes</p>
-        <h2 id="faq-heading">Dudas habituales sobre el título de transporte</h2>
-        <div className="faq-list">
-          {faq.map(([question, answer]) => (
-            <details key={question}>
-              <summary>{question}</summary>
-              <p>{answer}</p>
-            </details>
-          ))}
+      <section className="tt-final">
+        <div>
+          <SectionLabel>¿Listo para empezar?</SectionLabel>
+          <h2>Cuéntanos qué necesitas y te ayudamos a encontrar la mejor opción</h2>
+          <p>Te respondemos rápido, te asesoramos con expertos y te damos claridad legal desde el primer momento.</p>
+          <div className="tt-actions">
+            <a className="tt-btn tt-btn-primary" href={`${whatsappBase}?text=${encodeURIComponent("Hola, quiero información sobre Titulotransporte.")}`} data-event="click_final_whatsapp">
+              <Icon name="support" /> Hablar por WhatsApp
+            </a>
+            <Link className="tt-btn tt-btn-outline" href="/contacto/">Solicitar llamada</Link>
+          </div>
+          <div className="tt-final-points">
+            <span><Icon name="clock" /> Respuesta en 24/48 h</span>
+            <span><Icon name="shield" /> Sin compromiso</span>
+          </div>
         </div>
+        <Image src={images.final} alt="Asesor de transporte junto a camión" fill sizes="45vw" />
       </section>
 
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "FAQPage",
-            mainEntity: faq.map(([name, text]) => ({
-              "@type": "Question",
-              name,
-              acceptedAnswer: { "@type": "Answer", text },
-            })),
-          }),
-        }}
-      />
+      <a className="tt-sticky-whatsapp" href={whatsappHero}>WhatsApp</a>
+
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(graph) }} />
     </main>
   );
 }
