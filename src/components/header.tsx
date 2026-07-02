@@ -13,8 +13,9 @@ const navigation = [
   { href: "/producto/curso-titulo-profesional-transporte/", label: "Curso" },
   { href: "/test-competencia-profesional-mercancias/", label: "Tests" },
   { href: "/profesor-ia/", label: "Profesor IA" },
-  { href: "/blog/", label: "Recursos" },
+  { href: "/blog/", label: "Blog" },
   { href: "/sobre-nosotros/", label: "Nosotros" },
+  { href: "/contacto/", label: "Contacto" },
 ];
 
 export function Header() {
@@ -57,9 +58,6 @@ export function Header() {
           <Link className="header-register" href="/register/">
             Registrarse
           </Link>
-          <Link className="header-cta" href="/contacto/">
-            Contacto
-          </Link>
         </div>
 
         <details className="mobile-nav">
@@ -74,7 +72,6 @@ export function Header() {
             <Link href="/register/">Registrarse</Link>
             <Link href="/mi-cuenta/">Mi cuenta</Link>
             <a href={whatsappUrl}>WhatsApp</a>
-            <Link href="/contacto/">Contacto</Link>
           </nav>
         </details>
       </header>

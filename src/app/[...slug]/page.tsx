@@ -22,6 +22,16 @@ const importantLinks = [
   { href: "/blog/", label: "Recursos" },
 ];
 
+const examCategoryKeywords = [
+  "competencia profesional",
+  "examen",
+  "test",
+  "tests",
+  "supuestos",
+  "plan de estudio",
+  "transportista",
+];
+
 const routeVisuals: Record<string, { label: string; image: string; accent: string }> = {
   "/titulos/": {
     label: "Alquiler de título",
@@ -67,6 +77,11 @@ const routeVisuals: Record<string, { label: string; image: string; accent: strin
     label: "Recursos",
     image: "/home-assets/logistics-screen-clean.webp",
     accent: "Guías sobre normativa, gestor y competencia profesional.",
+  },
+  "/category/examen-competencia-profesional-mercancias/": {
+    label: "Examen competencia profesional",
+    image: "/home-assets/course-platform-clean.webp",
+    accent: "Guías, tests y planes de estudio para preparar mercancías.",
   },
 };
 
@@ -216,6 +231,7 @@ export default async function MigratedRoutePage({ params }: PageProps) {
   const isAccount = route.type === "account";
   const isPost = route.type === "post";
   const isTestPage = route.path === "/test-competencia-profesional-mercancias/";
+  const isExamCategory = route.path === "/category/examen-competencia-profesional-mercancias/";
   const migratedContent = findMigratedContent(route.path);
   const migratedHtml = normalizeLegacyHtml(migratedContent?.html || "");
   const hasHtml = Boolean(migratedHtml);
@@ -228,6 +244,14 @@ export default async function MigratedRoutePage({ params }: PageProps) {
   const schemas = schemaForRoute(route, pageTitle, pageDescription);
   const visual = routeVisualFor(route, isPost, isProduct);
   const session = isTestPage ? await auth() : null;
+  const examCategoryPosts = isExamCategory
+    ? blogPosts
+        .filter((post) => {
+          const haystack = `${post.path} ${post.title} ${post.description} ${post.h1}`.toLowerCase();
+          return examCategoryKeywords.some((keyword) => haystack.includes(keyword));
+        })
+        .slice(0, 16)
+    : [];
   const whatsappUrl = `https://wa.me/${site.whatsapp}?text=${encodeURIComponent(
     `Quiero información sobre ${pageTitle}`,
   )}`;
@@ -281,7 +305,35 @@ export default async function MigratedRoutePage({ params }: PageProps) {
         </section>
       ) : null}
 
-      {!isTestPage ? (
+      {isExamCategory ? (
+        <section className="inner-blog-list inner-blog-list--category">
+          <div>
+            <p className="tt-label">Archivo temático</p>
+            <h2>Guías para preparar competencia profesional de mercancías</h2>
+            <p>
+              Reúne los contenidos clave para estudiar el examen: supuestos prácticos, tests oficiales,
+              planes de estudio, normativa y recursos para practicar antes de presentarte.
+            </p>
+            <div className="tt-actions">
+              <Link className="tt-btn tt-btn-primary" href="/test-competencia-profesional-mercancias/">
+                Practicar test
+              </Link>
+              <Link className="tt-btn tt-btn-secondary" href="/producto/curso-titulo-profesional-transporte/">
+                Ver curso
+              </Link>
+            </div>
+          </div>
+          <div className="post-list">
+            {examCategoryPosts.map((post) => (
+              <Link key={post.path} href={post.path}>
+                {post.h1}
+              </Link>
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {!isTestPage && !isExamCategory ? (
       <div className="inner-layout">
         {hasHtml ? (
           <article className="wp-content-shell">

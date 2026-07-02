@@ -6,23 +6,31 @@ import {
   faArrowRight,
   faBookOpen,
   faBriefcase,
+  faCircleCheck,
   faClipboardCheck,
   faCoins,
   faComments,
+  faEnvelope,
   faFileContract,
   faGavel,
   faGraduationCap,
   faHeadset,
   faLaptop,
+  faLocationDot,
+  faLock,
+  faPaperPlane,
+  faPhone,
+  faRobot,
   faRoute,
   faScaleBalanced,
   faShieldHalved,
   faStar,
   faTruckFast,
+  faUserTie,
   faUsers,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { site } from "@/lib/site";
+import { blogPosts, site } from "@/lib/site";
 
 const wa = `https://wa.me/${site.whatsapp}`;
 
@@ -126,6 +134,340 @@ function CTA({ title, text, action }: { title: string; text: string; action: str
         <FontAwesomeIcon icon={faArrowRight} />
       </a>
     </section>
+  );
+}
+
+const courseReviews = [
+  {
+    author: "Maria garcia",
+    date: "2025-06-21",
+    dateLabel: "21 de junio de 2025",
+    rating: 5,
+    text: "Curso para ponerse al día. Soy autónoma y el módulo de acceso a mercados + estiba me ahorró multas y quebraderos. Todo muy fácil de entender y con ejemplos reales. Repetiría sin dudar.",
+  },
+  {
+    author: "carlos rodri",
+    date: "2025-07-01",
+    dateLabel: "1 de julio de 2025",
+    rating: 4,
+    text: "Temario completo y bien hilado, ADR y Seguridad Vial muy claros. Me gustó que no es puro tocho para leer, aunque echo en falta algún caso práctico más.",
+  },
+  {
+    author: "Sergio sanchez",
+    date: "2025-07-28",
+    dateLabel: "28 de julio de 2025",
+    rating: 5,
+    text: "Buena relación calidad precio; módulos claros y ejemplos de estiba. El ritmo es ameno, sin paja, y la lectura va fluida, fácil de entender.",
+  },
+  {
+    author: "Cristian",
+    date: "2025-08-08",
+    dateLabel: "8 de agosto de 2025",
+    rating: 4,
+    text: "Preparando el título de competencia profesional me vino de 10. Los resúmenes y las pequeñas ayudas son muy buenas, normativa actualizada ITV, masas y dimensiones todo sin rodeos.",
+  },
+  {
+    author: "ramiro",
+    date: "2025-08-17",
+    dateLabel: "17 de agosto de 2025",
+    rating: 5,
+    text: "Un curso bastante bueno, muy claro y fácil de entender. Aprobé a la primera el examen después de meses de estudiar.",
+  },
+  {
+    author: "Ivan Ramos",
+    date: "2025-08-26",
+    dateLabel: "26 de agosto de 2025",
+    rating: 5,
+    text: "Muy buen curso la verdad, me ha ayudado muchísimo.",
+  },
+  {
+    author: "Rodrigo",
+    date: "2025-08-28",
+    dateLabel: "28 de agosto de 2025",
+    rating: 5,
+    text: "Muy buen Curso de Título Transporte, he conseguido el título de transportista en menos de 4 meses.",
+  },
+  {
+    author: "Samuel Fernández",
+    date: "2025-09-01",
+    dateLabel: "1 de septiembre de 2025",
+    rating: 5,
+    text: "Después de 3 años intentándolo se me ha hecho fácil con vosotros, gracias por ayudarme a aprobar. Profesor IA 24 horas para mí ha sido la clave.",
+  },
+  {
+    author: "Ivan Fernández",
+    date: "2025-09-10",
+    dateLabel: "10 de septiembre de 2025",
+    rating: 5,
+    text: "Muchísimas gracias por todo, equipo muy atento y todo muy sencillo, la mejor forma de conseguir tu título de transportista.",
+  },
+  {
+    author: "Edwin",
+    date: "2025-10-11",
+    dateLabel: "11 de octubre de 2025",
+    rating: 5,
+    verified: true,
+    text: "Buen curso, fácil.",
+  },
+  {
+    author: "rodrigo",
+    date: "2025-10-20",
+    dateLabel: "20 de octubre de 2025",
+    rating: 5,
+    verified: true,
+    text: "Curso completo y muy simple de entender.",
+  },
+  {
+    author: "Cristian Recouso",
+    date: "2025-10-30",
+    dateLabel: "30 de octubre de 2025",
+    rating: 5,
+    verified: true,
+    text: "El curso me ha ido súper bien, está muy bien de precio a comparación con la competencia, y lo que ofrece es increíble. Todo el contenido es muy fácil de leer.",
+  },
+] as const;
+
+function Stars({ rating }: { rating: number }) {
+  return (
+    <span className="review-stars" aria-label={`${rating} de 5 estrellas`}>
+      {[1, 2, 3, 4, 5].map((star) => (
+        <FontAwesomeIcon key={star} icon={faStar} className={star <= rating ? "is-active" : ""} />
+      ))}
+    </span>
+  );
+}
+
+function ContactPage() {
+  const contactOptions = [
+    ["Teléfono", site.phone, `tel:${site.phone.replaceAll(" ", "")}`, faPhone],
+    ["WhatsApp", "Respuesta directa para estudiar tu caso", `${wa}?text=${encodeURIComponent("Hola, quiero hablar sobre mi caso de transporte.")}`, faHeadset],
+    ["Email", site.email, `mailto:${site.email}`, faEnvelope],
+    ["Servicio", "Asesoramiento en toda España", "/titulos/", faLocationDot],
+  ] as const;
+
+  return (
+    <main className="contact-page cp-page">
+      <JsonLd data={serviceSchema("/contacto/", "Contacto Titulotransporte", "Contacto para resolver dudas sobre alquiler, cesión, curso y tests del título de transporte.")} />
+      <section className="contact-hero">
+        <div>
+          <p className="tt-label">Contacto Titulotransporte</p>
+          <h1>Hablemos de tu caso de transporte</h1>
+          <p>
+            Cuéntanos si necesitas alquilar un título, cederlo, preparar el examen o resolver una duda legal. Te responderá una persona del equipo con una orientación clara.
+          </p>
+          <div className="tt-actions">
+            <a className="tt-btn tt-btn-primary" href={`${wa}?text=${encodeURIComponent("Hola, quiero que me asesoren sobre mi caso de transporte.")}`}>
+              Hablar por WhatsApp
+            </a>
+            <a className="tt-btn tt-btn-secondary" href={`tel:${site.phone.replaceAll(" ", "")}`}>
+              Llamar ahora
+            </a>
+          </div>
+        </div>
+        <aside className="contact-hero__panel">
+          {contactOptions.map(([title, text, href, icon]) => (
+            <a key={title} href={href}>
+              <Icon icon={icon} />
+              <span>{title}</span>
+              <strong>{text}</strong>
+            </a>
+          ))}
+        </aside>
+      </section>
+
+      <section className="contact-layout">
+        <form className="contact-form" action={`mailto:${site.email}`} method="post" encType="text/plain">
+          <p className="tt-label">Consulta rápida</p>
+          <h2>Envíanos los datos básicos</h2>
+          <label>
+            Nombre
+            <input name="nombre" type="text" autoComplete="name" required placeholder="Tu nombre" />
+          </label>
+          <label>
+            Teléfono o email
+            <input name="contacto" type="text" required placeholder="Dónde podemos responderte" />
+          </label>
+          <label>
+            ¿Qué necesitas?
+            <select name="tipo-consulta" defaultValue="">
+              <option value="" disabled>Selecciona una opción</option>
+              <option>Alquilar un título de transporte</option>
+              <option>Ceder mi título de transporte</option>
+              <option>Curso y tests de competencia profesional</option>
+              <option>Otra consulta legal o administrativa</option>
+            </select>
+          </label>
+          <label>
+            Mensaje
+            <textarea name="mensaje" rows={5} placeholder="Resume tu situación para poder orientarte mejor" />
+          </label>
+          <button className="tt-btn tt-btn-primary" type="submit">
+            Enviar consulta
+            <FontAwesomeIcon icon={faPaperPlane} />
+          </button>
+        </form>
+
+        <div className="contact-support">
+          <h2>Qué revisamos antes de darte una respuesta</h2>
+          {[
+            ["Tu objetivo", "Operar, ceder, prepararte para el examen o resolver una duda concreta."],
+            ["Documentación disponible", "Título, empresa, autorizaciones, vehículo o estado del curso, según el caso."],
+            ["Próximo paso", "Te indicamos si conviene avanzar, qué falta y qué riesgos hay que evitar."],
+          ].map(([title, text]) => (
+            <article key={title}>
+              <Icon icon={faCircleCheck} />
+              <h3>{title}</h3>
+              <p>{text}</p>
+            </article>
+          ))}
+        </div>
+      </section>
+    </main>
+  );
+}
+
+function ProfesorIAPage() {
+  return (
+    <main className="ai-page cp-page">
+      <JsonLd data={serviceSchema("/profesor-ia/", "Profesor IA para título de transporte", "Ayuda de estudio con inteligencia artificial para preparar el título de competencia profesional del transporte.")} />
+      <Hero
+        label="Profesor IA para transportistas"
+        title={<>Resuelve dudas del temario <span>cuando estás estudiando</span></>}
+        subtitle="Un apoyo de estudio para repasar normativa, supuestos, documentación y conceptos del examen de competencia profesional sin esperar a una tutoría."
+        image="/home-assets/ai-support-clean.webp"
+        primary="Hola, quiero probar el Profesor IA"
+      />
+      <section className="cp-benefit-grid ai-grid">
+        {([
+          ["Dudas al momento", "Pregunta por conceptos del temario, casos prácticos o errores de test y recibe una explicación ordenada.", faRobot],
+          ["Enfoque de examen", "Las respuestas se orientan a entender el criterio, no solo a memorizar una frase.", faClipboardCheck],
+          ["Estudio continuo", "Úsalo como acompañamiento entre sesiones para mantener ritmo y resolver bloqueos.", faBookOpen],
+        ] as const).map(([title, text, icon]) => (
+          <article key={title}>
+            <Icon icon={icon} />
+            <h2>{title}</h2>
+            <p>{text}</p>
+          </article>
+        ))}
+      </section>
+      <section className="ai-flow">
+        <div>
+          <p className="tt-label">Cómo usarlo bien</p>
+          <h2>Del fallo en un test a una explicación útil</h2>
+        </div>
+        {[
+          ["01", "Pega la pregunta o describe tu duda"],
+          ["02", "Recibe una explicación con el criterio clave"],
+          ["03", "Repasa el bloque relacionado y vuelve a practicar"],
+        ].map(([number, text]) => (
+          <article key={number}>
+            <strong>{number}</strong>
+            <p>{text}</p>
+          </article>
+        ))}
+      </section>
+      <CTA
+        title="Añade el Profesor IA a tu preparación"
+        text="Combínalo con el curso y los tests para estudiar con más autonomía y menos dudas acumuladas."
+        action="Quiero probar el Profesor IA"
+      />
+    </main>
+  );
+}
+
+function BlogLandingPage() {
+  const featured = blogPosts.slice(0, 9);
+
+  return (
+    <main className="blog-page cp-page">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "Blog",
+          name: "Blog de competencia profesional y transporte",
+          url: `${site.url}/blog/`,
+          publisher: { "@id": `${site.url}/#organization` },
+        }}
+      />
+      <section className="blog-hero">
+        <p className="tt-label">Recursos para transportistas</p>
+        <h1>Blog de competencia profesional y transporte</h1>
+        <p>
+          Guías claras sobre título de transportista, gestor de transporte, normativa, supuestos prácticos, tests y gestión diaria de empresas de transporte.
+        </p>
+        <div className="blog-tags" aria-label="Temas principales">
+          {["Competencia profesional", "Supuestos prácticos", "LOTT y ROTT", "Gestor de transporte", "Tests oficiales"].map((tag) => (
+            <span key={tag}>{tag}</span>
+          ))}
+        </div>
+      </section>
+
+      <section className="blog-grid">
+        {featured.map((post) => (
+          <article key={post.path} className="blog-card">
+            <p className="tt-label">Guía</p>
+            <h2>
+              <Link href={post.path}>{post.h1}</Link>
+            </h2>
+            <p>{post.description}</p>
+            <Link className="blog-card__link" href={post.path}>
+              Leer artículo
+              <FontAwesomeIcon icon={faArrowRight} />
+            </Link>
+          </article>
+        ))}
+      </section>
+    </main>
+  );
+}
+
+function SobreNosotrosPage() {
+  return (
+    <main className="about-page cp-page">
+      <JsonLd data={serviceSchema("/sobre-nosotros/", "Sobre Titulotransporte", "Equipo especializado en título de transporte, asesoría y formación para empresas y autónomos del transporte en España.")} />
+      <Hero
+        label="Sobre Titulotransporte"
+        title={<>Especialistas en <span>título de transporte</span></>}
+        subtitle="Ayudamos a empresas, autónomos y profesionales del transporte a tomar decisiones con criterio: alquiler, cesión, formación, tests y soporte normativo."
+        image="/home-assets/trust-team-clean.webp"
+        primary="Hola, quiero conocer cómo podéis ayudarme"
+      />
+      <section className="about-stats">
+        {[
+          ["+15 años", "Experiencia acompañando a empresas y autónomos"],
+          ["+1.200", "Clientes satisfechos en España"],
+          ["24/48 h", "Tiempo medio de activación"],
+          ["100% legal", "Trabajo alineado con normativa vigente"],
+        ].map(([value, text]) => (
+          <article key={value}>
+            <strong>{value}</strong>
+            <p>{text}</p>
+          </article>
+        ))}
+      </section>
+      <section className="about-principles">
+        <div>
+          <p className="tt-label">Nuestra forma de trabajar</p>
+          <h2>Claridad antes que promesas vacías</h2>
+        </div>
+        {[
+          ["Diagnóstico honesto", "Primero revisamos si tu caso encaja y qué límites existen."],
+          ["Documentación ordenada", "Te explicamos qué necesitas y por qué, sin pasos confusos."],
+          ["Acompañamiento real", "No desaparecemos tras el primer contacto: resolvemos dudas durante el proceso."],
+        ].map(([title, text]) => (
+          <article key={title}>
+            <Icon icon={faUserTie} />
+            <h3>{title}</h3>
+            <p>{text}</p>
+          </article>
+        ))}
+      </section>
+      <CTA
+        title="Cuéntanos en qué punto estás"
+        text="Te orientamos sobre la vía más razonable para alquilar, ceder o preparar el título de transporte."
+        action="Quiero hablar con Titulotransporte"
+      />
+    </main>
   );
 }
 
@@ -414,6 +756,17 @@ export function CourseProductPage() {
                 ratingValue: "4.83",
                 reviewCount: "12",
               },
+              review: courseReviews.map((review) => ({
+                "@type": "Review",
+                author: { "@type": "Person", name: review.author },
+                datePublished: review.date,
+                reviewBody: review.text,
+                reviewRating: {
+                  "@type": "Rating",
+                  ratingValue: review.rating,
+                  bestRating: 5,
+                },
+              })),
               offers: {
                 "@type": "Offer",
                 price: "99",
@@ -532,6 +885,79 @@ export function CourseProductPage() {
         </div>
       </section>
 
+      <section className="course-reviews" id="valoraciones">
+        <div className="course-reviews__head">
+          <div>
+            <p className="tt-label">Valoraciones reales de alumnos</p>
+            <h2>Opiniones del curso de título de transporte</h2>
+            <p>
+              Reseñas importadas de la ficha original de WordPress para mantener la prueba social real del curso y no perder señales de confianza.
+            </p>
+          </div>
+          <div className="course-reviews__score" aria-label="Valoración media 4.83 de 5">
+            <strong>4,83</strong>
+            <Stars rating={5} />
+            <span>12 valoraciones</span>
+          </div>
+        </div>
+
+        <div className="course-review-grid">
+          {courseReviews.map((review) => (
+            <article key={`${review.author}-${review.date}`} className="course-review-card">
+              <div>
+                <Stars rating={review.rating} />
+                {"verified" in review && review.verified ? <span className="review-verified">Compra verificada</span> : null}
+              </div>
+              <p>{review.text}</p>
+              <footer>
+                <strong>{review.author}</strong>
+                <time dateTime={review.date}>{review.dateLabel}</time>
+              </footer>
+            </article>
+          ))}
+        </div>
+
+        <aside className="course-review-form">
+          <div>
+            <p className="tt-label">Dejar una reseña</p>
+            <h3>Solo alumnos con compra verificada</h3>
+            <p>
+              Para evitar reseñas falsas, el sistema debe comprobar que has comprado el curso antes de permitir publicar una valoración.
+            </p>
+            <div className="tt-actions">
+              <Link className="tt-btn tt-btn-primary" href="/login/">
+                Iniciar sesión
+              </Link>
+              <Link className="tt-btn tt-btn-secondary" href="/mi-cuenta/">
+                Ver mi cuenta
+              </Link>
+            </div>
+          </div>
+          <form aria-label="Formulario de reseña bloqueado hasta verificar compra">
+            <fieldset disabled>
+              <label>
+                Tu puntuación
+                <select name="rating" defaultValue="5">
+                  <option value="5">5 estrellas</option>
+                  <option value="4">4 estrellas</option>
+                  <option value="3">3 estrellas</option>
+                  <option value="2">2 estrellas</option>
+                  <option value="1">1 estrella</option>
+                </select>
+              </label>
+              <label>
+                Tu reseña
+                <textarea name="review" rows={4} placeholder="Cuéntanos cómo te ha ayudado el curso" />
+              </label>
+              <button type="button">
+                <FontAwesomeIcon icon={faLock} />
+                Verifica tu compra para publicar
+              </button>
+            </fieldset>
+          </form>
+        </aside>
+      </section>
+
       <CTA
         title="¿Listo para conseguir tu título de transporte?"
         text="Inscríbete y empieza a estudiar con un curso práctico, actualizado y pensado para aprobar sin dolores de cabeza."
@@ -546,5 +972,9 @@ export function CommercialRoutePage({ path }: { path: string }) {
   if (path === "/titulos/") return <TitulosPage />;
   if (path === "/servicios-asesoria-legal-para-transporte/") return <LegalTransportPage />;
   if (path === "/producto/curso-titulo-profesional-transporte/") return <CourseProductPage />;
+  if (path === "/contacto/") return <ContactPage />;
+  if (path === "/profesor-ia/") return <ProfesorIAPage />;
+  if (path === "/blog/") return <BlogLandingPage />;
+  if (path === "/sobre-nosotros/") return <SobreNosotrosPage />;
   return null;
 }

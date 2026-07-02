@@ -111,6 +111,15 @@ export const migratedRoutes: RouteRecord[] = [
     lastModified: "2026-01-17",
   },
   {
+    path: "/category/examen-competencia-profesional-mercancias/",
+    title: "Examen competencia profesional mercancías | Guías y tests",
+    description:
+      "Archivo de guías para preparar el examen de competencia profesional de mercancías: tests oficiales, supuestos prácticos, plan de estudio y normativa.",
+    h1: "Examen competencia profesional mercancías",
+    type: "page",
+    lastModified: "2026-07-02",
+  },
+  {
     path: "/carrito/",
     title: "Carrito | titulotransporte.com",
     description: "Revisa los productos añadidos antes de finalizar la compra.",
