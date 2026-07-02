@@ -434,13 +434,43 @@ function SobreNosotrosPage() {
       />
       <section className="about-stats">
         {[
-          ["+15 años", "Experiencia acompañando a empresas y autónomos"],
-          ["+1.200", "Clientes satisfechos en España"],
+          ["300+", "Proyectos completados en transporte"],
+          ["99%", "Satisfacción de clientes"],
+          ["6+ años", "Experiencia especializada"],
           ["24/48 h", "Tiempo medio de activación"],
-          ["100% legal", "Trabajo alineado con normativa vigente"],
         ].map(([value, text]) => (
           <article key={value}>
             <strong>{value}</strong>
+            <p>{text}</p>
+          </article>
+        ))}
+      </section>
+      <section className="about-story">
+        <div>
+          <p className="tt-label">Quiénes somos</p>
+          <h2>Tu aliado legal en transporte y alquiler de títulos en España</h2>
+        </div>
+        <div>
+          <p>
+            Bienvenido a TituloTransporte.com. Ayudamos a empresas, autónomos y gestores de transporte a moverse con seguridad en el ámbito del transporte por carretera, el alquiler de títulos y la preparación del título profesional.
+          </p>
+          <p>
+            Desde nuestros inicios hemos trabajado para convertirnos en un referente práctico del sector: asesoramiento claro, soluciones legales sólidas y acompañamiento real en cada fase del proceso.
+          </p>
+          <p>
+            Nuestra trayectoria está marcada por la dedicación, el trabajo constante y la pasión por ofrecer respuestas fiables a quienes necesitan operar, crecer o profesionalizarse dentro de la industria del transporte.
+          </p>
+        </div>
+      </section>
+      <section className="about-mission-grid">
+        {[
+          ["Nuestra misión", "Brindar asesoramiento legal especializado y soluciones adaptadas a clientes del sector transporte y del alquiler de títulos, con un servicio claro, cercano y orientado al crecimiento sostenible."],
+          ["Nuestra visión", "Liderar una forma más transparente y responsable de entender el transporte y el alquiler de títulos en España, promoviendo buenas prácticas y cumplimiento normativo real."],
+          ["Nuestros valores", "Integridad, profesionalismo, transparencia y compromiso. Trabajamos para ser un socio fiable en decisiones que afectan al futuro de cada cliente."],
+        ].map(([title, text]) => (
+          <article key={title}>
+            <Icon icon={faShieldHalved} />
+            <h3>{title}</h3>
             <p>{text}</p>
           </article>
         ))}

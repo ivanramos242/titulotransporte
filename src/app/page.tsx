@@ -145,6 +145,7 @@ const aiBenefits = [
 const resources = [
   ["PDF", "Guía para alquilar un título de transportista", "Qué revisar, qué preguntar y qué errores evitar antes de decidir.", "/blog/"],
   ["Checklist", "Checklist para empezar en transporte", "Requisitos, pasos y documentación básica para avanzar con más claridad.", "/titulos/"],
+  ["Tests", "Practica por módulos antes del examen", "Elige grupo, preguntas o casos y trabaja con bloques de 50 preguntas.", "/test-competencia-profesional-mercancias/"],
 ];
 
 const faqs = [

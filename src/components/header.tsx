@@ -1,21 +1,32 @@
 import Link from "next/link";
 import {
+  faBookOpen,
   faClock,
+  faEnvelope,
   faHeadset,
+  faHouse,
+  faRobot,
   faShieldHalved,
+  faTruckFast,
+  faUser,
+  faUserPlus,
+  faUsers,
+  faFileContract,
+  faGraduationCap,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { site } from "@/lib/site";
 
 const navigation = [
-  { href: "/titulos/", label: "Alquiler de título" },
-  { href: "/cede-tu-titulo-de-transporte/", label: "Ceder título" },
-  { href: "/producto/curso-titulo-profesional-transporte/", label: "Curso" },
-  { href: "/test-competencia-profesional-mercancias/", label: "Tests" },
-  { href: "/profesor-ia/", label: "Profesor IA" },
-  { href: "/blog/", label: "Blog" },
-  { href: "/sobre-nosotros/", label: "Nosotros" },
-  { href: "/contacto/", label: "Contacto" },
+  { href: "/", label: "Inicio", icon: faHouse },
+  { href: "/titulos/", label: "Alquiler de título", icon: faFileContract },
+  { href: "/cede-tu-titulo-de-transporte/", label: "Ceder título", icon: faTruckFast },
+  { href: "/producto/curso-titulo-profesional-transporte/", label: "Curso", icon: faGraduationCap },
+  { href: "/test-competencia-profesional-mercancias/", label: "Tests", icon: faBookOpen },
+  { href: "/profesor-ia/", label: "Profesor IA", icon: faRobot },
+  { href: "/blog/", label: "Blog", icon: faBookOpen },
+  { href: "/sobre-nosotros/", label: "Nosotros", icon: faUsers },
+  { href: "/contacto/", label: "Contacto", icon: faEnvelope },
 ];
 
 export function Header() {
@@ -46,6 +57,7 @@ export function Header() {
         <nav className="desktop-nav" aria-label="Navegación principal">
           {navigation.map((item) => (
             <Link key={item.href} href={item.href}>
+              <FontAwesomeIcon icon={item.icon} />
               {item.label}
             </Link>
           ))}
@@ -53,9 +65,11 @@ export function Header() {
 
         <div className="header-actions">
           <Link className="header-login" href="/login/">
+            <FontAwesomeIcon icon={faUser} />
             Iniciar sesión
           </Link>
           <Link className="header-register" href="/register/">
+            <FontAwesomeIcon icon={faUserPlus} />
             Registrarse
           </Link>
         </div>
@@ -65,6 +79,7 @@ export function Header() {
           <nav aria-label="Navegación móvil">
             {navigation.map((item) => (
               <Link key={item.href} href={item.href}>
+                <FontAwesomeIcon icon={item.icon} />
                 {item.label}
               </Link>
             ))}

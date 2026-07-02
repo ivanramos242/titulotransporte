@@ -1,0 +1,260 @@
+
+> titulotransporte@0.1.0 dev
+> next dev --port 3031
+
+▲ Next.js 16.2.9 (Turbopack)
+- Local:         http://localhost:3031
+- Network:       http://10.5.0.2:3031
+✓ Ready in 527ms
+
+ GET / 200 in 1975ms (next.js: 240ms, application-code: 1735ms)
+ GET / 200 in 458ms (next.js: 10ms, application-code: 448ms)
+ GET /politica-de-privacidad/ 200 in 660ms (next.js: 613ms, generate-params: 544ms, application-code: 48ms)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+ GET /titulos/ 200 in 38ms (next.js: 9ms, generate-params: 5ms, application-code: 28ms)
+ GET /cede-tu-titulo-de-transporte/ 200 in 41ms (next.js: 10ms, generate-params: 6ms, application-code: 31ms)
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 77ms (next.js: 9ms, generate-params: 5ms, application-code: 68ms)
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 16ms (next.js: 9ms, generate-params: 4ms, application-code: 7ms)
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 71ms (next.js: 4ms, generate-params: 25µs, application-code: 67ms)
+ GET /test-competencia-profesional-mercancias/ 200 in 51ms (next.js: 9ms, generate-params: 4ms, application-code: 41ms)
+ GET /api/questions?module=1&limit=200 200 in 179ms (next.js: 160ms, application-code: 19ms)
+ GET /test-competencia-profesional-mercancias/ 200 in 33ms (next.js: 9ms, generate-params: 5ms, application-code: 24ms)
+[browser] Detected `scroll-behavior: smooth` on the `<html>` element. To disable smooth scrolling during route transitions, add `data-scroll-behavior="smooth"` to your <html> element. Learn more: https://nextjs.org/docs/messages/missing-data-scroll-behavior
+ GET /api/questions?module=1&limit=200 200 in 16ms (next.js: 4ms, application-code: 12ms)
+ GET /api/questions?module=1&limit=200 200 in 15ms (next.js: 3ms, application-code: 11ms)
+ GET /contacto/ 200 in 44ms (next.js: 11ms, generate-params: 6ms, application-code: 33ms)
+ GET /sobre-nosotros/ 200 in 35ms (next.js: 8ms, generate-params: 5ms, application-code: 26ms)
+ GET /sobre-nosotros/ 200 in 34ms (next.js: 8ms, generate-params: 5ms, application-code: 26ms)
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 76ms (next.js: 8ms, generate-params: 4ms, application-code: 68ms)
+✓ Compiled in 128ms
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 750ms (next.js: 218ms, generate-params: 7ms, application-code: 532ms)
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 320ms (next.js: 10ms, generate-params: 39µs, application-code: 310ms)
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 150ms (next.js: 5ms, generate-params: 27µs, application-code: 144ms)
+✓ Compiled in 68ms
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 496ms (next.js: 134ms, generate-params: 6ms, application-code: 362ms)
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 150ms (next.js: 6ms, generate-params: 27µs, application-code: 144ms)
+✓ Compiled in 41ms
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 598ms (next.js: 197ms, generate-params: 12ms, application-code: 401ms)
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 169ms (next.js: 7ms, generate-params: 33µs, application-code: 162ms)
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+✓ Compiled in 76ms
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET /producto/curso-titulo-profesional-transporte/ 500 in 1309ms (next.js: 1144ms, application-code: 165ms)
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+ GET /producto/curso-titulo-profesional-transporte/ 500 in 27ms (next.js: 15ms, application-code: 12ms)
+ GET /producto/curso-titulo-profesional-transporte/ 500 in 30ms (next.js: 22ms, application-code: 9ms)
+⨯ ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  [90m4 |[0m [36mimport[0m { auth } [36mfrom[0m [32m"../../../auth"[0m;
+  [90m5 |[0m [36mimport[0m { [33mCommercialRoutePage[0m } [36mfrom[0m [32m"@/components/commercial-pages"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mTestPractice[0m } [36mfrom[0m [32m"@/components/test-practice"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m [36mimport[0m wpContent [36mfrom[0m [32m"@/data/wp-content.json"[0m;
+  [90m8 |[0m [36mimport[0m { allRoutes, blogPosts, metadataFor, routeByPath, site } [36mfrom[0m [32m"@/lib/site"[0m;
+  [90m9 |[0m
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] Uncaught Error: ./src/app/[...slug]/page.tsx:6:1
+Module not found: Can't resolve '@/components/test-practice'
+  4 | import { auth } from "../../../auth";
+  5 | import { CommercialRoutePage } from "@/components/commercial-pages";
+> 6 | import { TestPractice } from "@/components/test-practice";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 | import wpContent from "@/data/wp-content.json";
+  8 | import { allRoutes, blogPosts, metadataFor, routeByPath, site } from "@/lib/site";
+  9 |
+
+Import map: aliased to relative './src/components/test-practice' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/[...slug]/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/[...slug]/page.tsx:6:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+✓ Compiled in 66ms
+ GET /producto/curso-titulo-profesional-transporte/ 200 in 1051ms (next.js: 155ms, generate-params: 5ms, application-code: 896ms)
+✓ Compiled in 37ms
+ GET /test-competencia-profesional-mercancias/ 200 in 335ms (next.js: 13ms, generate-params: 6ms, application-code: 322ms)
+ GET / 200 in 1225ms (next.js: 174ms, application-code: 1052ms)
+ GET /api/questions?module=1&limit=600 200 in 152ms (next.js: 132ms, application-code: 20ms)
