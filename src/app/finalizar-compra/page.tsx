@@ -5,19 +5,18 @@ import {
   faArrowLeft,
   faCheck,
   faCircleCheck,
-  faCreditCard,
   faGraduationCap,
+  faHeadset,
   faLock,
   faShieldHalved,
-  faTag,
   faUsers,
   faClock,
-  faHeadset,
 } from "@fortawesome/free-solid-svg-icons";
+import { createCourseCheckoutSession } from "./actions";
 
 export const metadata: Metadata = {
   title: "Finalizar compra | Curso Título Transporte",
-  description: "Completa la compra del curso de título de transportista con pago seguro.",
+  description: "Completa la compra del curso de título de transportista con pago seguro en Stripe.",
   robots: { index: false, follow: false },
 };
 
@@ -42,75 +41,35 @@ export default function CheckoutPage() {
       </header>
 
       <section className="checkout-grid">
-        <form className="checkout-form">
+        <form className="checkout-form" action={createCourseCheckoutSession}>
           <div className="checkout-title">
             <h1>Completa tu compra</h1>
-            <p>Estás a un paso de impulsar tu carrera en el transporte.</p>
+            <p>Estás a un paso de activar tu acceso al curso de título de transporte.</p>
           </div>
 
           <div className="checkout-secure">
             <FontAwesomeIcon icon={faLock} />
             <div>
-              <strong>Pago seguro</strong>
-              <span>Todos los datos se transmiten cifrados y protegidos.</span>
+              <strong>Checkout real de Stripe</strong>
+              <span>La tarjeta se introduce en Stripe, no en nuestra web. Usamos producto y precio inline, sin crear producto en Stripe.</span>
             </div>
-            <em>Procesado con stripe</em>
+            <em>Procesado con Stripe</em>
           </div>
 
-          <label>
-            Correo electrónico
-            <input type="email" placeholder="hola@ejemplo.com" />
-            <small>Te enviaremos tu acceso y la confirmación de compra.</small>
-          </label>
-
-          <fieldset className="card-fieldset">
-            <legend>Datos de la tarjeta</legend>
-            <div className="card-number">
-              <FontAwesomeIcon icon={faCreditCard} />
-              <input inputMode="numeric" placeholder="Número de tarjeta" />
-              <span>VISA · MC · AMEX</span>
-            </div>
-            <div className="card-row">
-              <input placeholder="MM / AA" />
-              <input placeholder="CVC" />
-            </div>
-          </fieldset>
-
-          <label>
-            Titular de la tarjeta
-            <input placeholder="Nombre completo del titular" />
-          </label>
-
-          <div className="checkout-two">
-            <label>
-              País o región
-              <select defaultValue="España">
-                <option>España</option>
-                <option>Portugal</option>
-                <option>Francia</option>
-              </select>
-            </label>
-            <label>
-              Código postal
-              <input placeholder="Ej. 28001" />
-            </label>
+          <div className="checkout-next">
+            <h2>Qué ocurrirá al continuar</h2>
+            <p>
+              Te enviaremos a una página segura de Stripe para introducir tus datos de pago. Al completar el pago volverás automáticamente a Titulotransporte.
+            </p>
           </div>
 
-          <label>
-            <span><FontAwesomeIcon icon={faTag} /> Código de descuento <small>(opcional)</small></span>
-            <div className="discount-row">
-              <input placeholder="Introducir código" />
-              <button type="button">Aplicar</button>
-            </div>
-          </label>
-
-          <button className="checkout-submit" type="button">
-            <span><FontAwesomeIcon icon={faLock} /> Finalizar compra</span>
-            <strong>89,00 €</strong>
+          <button className="checkout-submit" type="submit">
+            <span><FontAwesomeIcon icon={faLock} /> Ir a pago seguro</span>
+            <strong>99,00 €</strong>
           </button>
           <p className="checkout-terms">
-            Al finalizar la compra aceptas nuestros <Link href="/terminos-y-condiciones-de-compra/">Términos de uso</Link> y{" "}
-            <Link href="/politica-de-privacidad/">Política de privacidad</Link>.
+            Al continuar aceptas nuestros <Link href="/terminos-y-condiciones-de-compra/">Términos de uso</Link> y{" "}
+            <Link href="/politica-de-privacidad/">Política de privacidad</Link>. Stripe solicitará la aceptación en el checkout.
           </p>
         </form>
 
@@ -123,7 +82,7 @@ export default function CheckoutPage() {
                 <strong>Curso de Transportista</strong>
                 <small>Acceso completo · 12 meses</small>
               </div>
-              <b>89,00 €</b>
+              <b>99,00 €</b>
             </div>
             <div className="order-includes">
               <strong>Incluye:</strong>
@@ -138,9 +97,9 @@ export default function CheckoutPage() {
               ))}
             </div>
             <dl>
-              <div><dt>Subtotal</dt><dd>89,00 €</dd></div>
-              <div><dt>IVA (21%)</dt><dd>18,69 €</dd></div>
-              <div className="order-total"><dt>Total</dt><dd>89,00 €</dd></div>
+              <div><dt>Subtotal</dt><dd>81,82 €</dd></div>
+              <div><dt>IVA incluido (21%)</dt><dd>17,18 €</dd></div>
+              <div className="order-total"><dt>Total</dt><dd>99,00 €</dd></div>
             </dl>
           </article>
 

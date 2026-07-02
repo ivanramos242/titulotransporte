@@ -6153,6 +6153,44 @@ body:has(.checkout-page) > .site-footer {
   font-weight: 900;
 }
 
+.checkout-next {
+  display: grid;
+  gap: 10px;
+  border: 1px solid #d8e2ef;
+  border-radius: 12px;
+  padding: 22px;
+  background: #f8fbff;
+}
+
+.checkout-next h2 {
+  margin: 0;
+  color: #071527;
+  font-size: 22px;
+  line-height: 1.18;
+}
+
+.checkout-next p {
+  margin: 0;
+  color: #405071;
+  line-height: 1.6;
+}
+
+.checkout-success-page {
+  min-height: 72vh;
+}
+
+.checkout-success {
+  max-width: 760px;
+  text-align: center;
+}
+
+.checkout-success__icon {
+  width: 58px;
+  height: 58px;
+  margin: 0 auto 18px;
+  color: #11a463;
+}
+
 @media (max-width: 1180px) {
   .desktop-nav {
     gap: 16px;
