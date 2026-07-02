@@ -28,9 +28,11 @@ export const metadata: Metadata = {
   authors: [{ name: site.name }],
   icons: {
     icon: [
-      { url: "/icon.png", type: "image/png" },
-      { url: "/brand/titulotransporte-logo-mark.png", type: "image/png" },
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.png", type: "image/png", sizes: "512x512" },
+      { url: "/brand/titulotransporte-logo-mark.png", type: "image/png", sizes: "512x512" },
     ],
+    shortcut: "/favicon.ico",
     apple: "/apple-icon.png",
   },
   openGraph: {
